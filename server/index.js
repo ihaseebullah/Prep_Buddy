@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 const bcrypt = require("bcrypt");
 const session = require('express-session');
+const { connectToDb } = require('./controllers/Connection_to_DB');
 //Initialization
 const app = express();
 app.use(cors({
@@ -22,6 +23,9 @@ app.use(session({
     },
 }))
 //Controllers
+const database_Connection = connectToDb
+//connection to database server
+database_Connection();
 //Routes
 app.get('/', async function (req, res) {
     res.json({ message: 'Hello World' });
