@@ -1,14 +1,17 @@
 import axios from "axios";
 import "./App.css";
-import Test from "./components/Test";
+import Home from "./pages/Home";
+import MainContextProvider from "./Context/Context";
+import Router from "./router/Router";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:3000";
   axios.defaults.withCredentials = true;
   return (
-    <>
-      <Test />
-    </>
+    <MainContextProvider>
+      <Router />
+     <Home />
+    </MainContextProvider>
   );
 }
 
