@@ -1,4 +1,5 @@
 import { createContext,useState } from "react";
+import Sidebar from "../components/Sidebar";
 
 export const MainContext = createContext({});
 

@@ -1,11 +1,15 @@
 import Footer from "./Footer";
+import Sidebar from "./Sidebar";
 
 export default function Page(props) {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div
+      style={{ backgroundColor: "#F1F2F3" }}
+      className="min-h-screen flex flex-col p-4 pt-10"
+    >
       <div className="flex-1">
-        <div className="container mx-auto "></div>
-        {props.children}
+        <div className="container mx-auto ">{props.children}</div>
+        <Sidebar />
       </div>
       <Footer />
     </div>

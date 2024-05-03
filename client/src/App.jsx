@@ -10,7 +10,6 @@ function App() {
   return (
     <MainContextProvider>
       <Router />
-     <Home />
     </MainContextProvider>
   );
 }
