@@ -20,7 +20,7 @@ export default function Pill() {
             className=" rounded-full shadow-lg flex justify-center items-center"
           >
             <div
-              style={{ backgroundColor: "#D13E24", fontFamily: "nunito" }}
+              style={{ backgroundColor: "red", fontFamily: "nunito" }}
               className="rounded-full text-white  h-[3.5rem] w-[3.5rem] flex justify-center items-center"
             >
               40%
@@ -50,10 +50,15 @@ export default function Pill() {
               minWidth: "4.5rem",
               minHeight: "4.5rem",
             }}
-            className="rounded-full p-3 shadow-lg flex justify-center items-center"
+            className="rounded-full shadow-lg flex justify-center items-center"
           >
             <div>
-              <img style={{ fontSize: "2rem" }} src={quiz} />
+              <div className="rounded-full p-2 h-[3.5rem] w-[3.5rem] flex items-center justify-center" style={{backgroundColor:"red"}}>
+                <i
+                  class="fa-solid fa-clipboard-list"
+                  style={{ fontSize: "2rem", color: "white" }}
+                ></i>
+              </div>
             </div>
           </div>
         </Grid>

@@ -18,7 +18,7 @@ export default function IconButton(props) {
             setSideBarState(true);
           }}
         >
-          <NotificationsActiveRoundedIcon style={{ color: "#6B6B6B" }} />
+          <i class="fa-solid fa-bars text-[1.4rem]"></i>
         </button>
       ) : (
         <button>

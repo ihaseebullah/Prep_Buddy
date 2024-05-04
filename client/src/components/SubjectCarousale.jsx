@@ -27,7 +27,7 @@ const data = [
   },
 ];
 
-export default function SubjectCarousale() {
+function SubjectCarousale() {
   return (
     <Box
       sx={{
@@ -66,4 +66,18 @@ export default function SubjectCarousale() {
       ))}
     </Box>
   );
+}
+
+export default function SubjectCarousaleWrapper(){
+  return(
+    <div>
+    <h1
+      style={{ fontFamily: "Roboto,Kanit", fontSize: "1rem" }}
+      className="pt-2"
+    >
+      Subject Assesments
+    </h1>
+    <SubjectCarousale />
+  </div>
+  )
 }

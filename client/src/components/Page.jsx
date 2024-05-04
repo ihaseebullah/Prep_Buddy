@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import Sidebar from "./Sidebar";
+import Sidebar, { NotificationsDrawer } from "./Sidebar";
 
 export default function Page(props) {
   return (
@@ -10,6 +10,7 @@ export default function Page(props) {
       <div className="flex-1">
         <div className="container mx-auto ">{props.children}</div>
         <Sidebar />
+        <NotificationsDrawer />
       </div>
       <Footer />
     </div>

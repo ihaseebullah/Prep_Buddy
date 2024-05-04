@@ -1,21 +1,13 @@
 import * as React from "react";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import RoofingOutlinedIcon from "@mui/icons-material/RoofingOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import { MainContext } from "../Context/Context";
-import analytics from "../assets/img/analytics.png";
-import liked from "../assets/img/liked.png";
-import bell from "../assets/img/bell.png";
-import home from "../assets/img/home.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 export default function Navigation() {
-  const [value, setValue] = React.useState("Home");
-  const { setSideBarState, sideBarState } = React.useContext(MainContext);
+  const { bottomBar, setbottomBar, value, setValue } =
+    React.useContext(MainContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -24,7 +16,7 @@ export default function Navigation() {
     <BottomNavigation
       value={value}
       style={{ backgroundColor: "#F9F9FA" }}
-      className="shadow-lg rounded-[12rem]"
+      className="bottom-navigation shadow-lg rounded-[12rem]"
       onChange={handleChange}
     >
       <BottomNavigationAction
@@ -35,18 +27,33 @@ export default function Navigation() {
           </Typography>
         }
         value="Home"
-        sx={{ color: "yellow" }}
-        icon={<img src={home} style={{maxHeight: "2.2rem",minHeight: "2.6rem" }} />}
+        icon={
+          <i
+            class="fa-solid fa-house"
+            style={{
+              fontSize: "1.5rem",
+              color: `${value === "Home" ? "red" : "gray"}`,
+            }}
+          ></i>
+        }
       />
       <BottomNavigationAction
-        onClick={() => navigateTo("/favourites")}
+        onClick={() => navigateTo("/")}
         label={
           <Typography variant="body2" style={{ color: "#D13E24" }}>
             Liked
           </Typography>
         }
         value="Liked"
-        icon={<img src={liked} style={{ maxHeight: "2rem",minHeight: "2rem" }} />}
+        icon={
+          <i
+            className={`fa-${value === "Liked" ? "solid" : "regular"} fa-heart`}
+            style={{
+              fontSize: "1.5rem",
+              color: `${value === "Liked" ? "red" : "gray"}`,
+            }}
+          ></i>
+        }
       />
       <BottomNavigationAction
         label={
@@ -54,20 +61,40 @@ export default function Navigation() {
             Notifications
           </Typography>
         }
+        onClick={() => setbottomBar(true)}
         value="Notifications"
-        icon={<img src={bell} style={{ maxHeight: "2rem",minHeight: "2.3rem" }} />}
+        icon={
+          <i
+            class={`fa-regular fa-bell`}
+            style={{
+              fontSize: "1.5rem",
+              color: `${value === "Notifications" ? "red" : "gray"}`,
+            }}
+          ></i>
+        }
       />
       <BottomNavigationAction
-        onClick={() => {
-          setSideBarState(true);
-        }}
         label={
           <Typography variant="body2" style={{ color: "#D13E24" }}>
             Analytics
           </Typography>
         }
         value="Analytics"
-        icon={<img src={analytics} style={{ maxHeight: "2rem",minHeight: "2rem" }} />}
+        sx={{
+          "&.Mui-selected": {
+            // styles for the selected item
+            color: "#F9F9FA", // change to your desired color
+          },
+        }}
+        icon={
+          <i
+            class="fa-solid fa-chart-simple"
+            style={{
+              fontSize: "1.5rem",
+              color: `${value === "Analytics" ? "red" : "gray"}`,
+            }}
+          ></i>
+        }
       />
     </BottomNavigation>
   );
