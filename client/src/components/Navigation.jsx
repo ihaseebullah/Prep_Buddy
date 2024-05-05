@@ -6,6 +6,15 @@ import { MainContext } from "../Context/Context";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 export default function Navigation() {
+  const styles = {
+    background: "rgba(53, 83, 191, 0.6)",
+    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+    WebkitBackdropFilter: "blur(5.5px)", // For Webkit browsers
+    backdropFilter: "blur(5.5px)", // Standard backdrop-filter property
+    borderRadius: "5rem",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+  };
+
   const { bottomBar, setbottomBar, value, setValue } =
     React.useContext(MainContext);
   const handleChange = (event, newValue) => {
@@ -15,14 +24,14 @@ export default function Navigation() {
   return (
     <BottomNavigation
       value={value}
-      style={{ backgroundColor: "#F9F9FA" }}
-      className="bottom-navigation shadow-lg rounded-[12rem]"
+      style={styles}
+      className="bottom-navigation shadow-lg opacity-[.95]   rounded-[5rem]"
       onChange={handleChange}
     >
       <BottomNavigationAction
         onClick={() => navigateTo("/")}
         label={
-          <Typography variant="body2" style={{ color: "#D13E24" }}>
+          <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Recents
           </Typography>
         }
@@ -32,7 +41,7 @@ export default function Navigation() {
             class="fa-solid fa-house"
             style={{
               fontSize: "1.5rem",
-              color: `${value === "Home" ? "red" : "gray"}`,
+              color: `${value === "Home" ? "#E1E1E1" : "#E1E1E1"}`,
             }}
           ></i>
         }
@@ -40,7 +49,7 @@ export default function Navigation() {
       <BottomNavigationAction
         onClick={() => navigateTo("/")}
         label={
-          <Typography variant="body2" style={{ color: "#D13E24" }}>
+          <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Liked
           </Typography>
         }
@@ -50,14 +59,14 @@ export default function Navigation() {
             className={`fa-${value === "Liked" ? "solid" : "regular"} fa-heart`}
             style={{
               fontSize: "1.5rem",
-              color: `${value === "Liked" ? "red" : "gray"}`,
+              color: `${value === "Liked" ? "#E1E1E1" : "#E1E1E1"}`,
             }}
           ></i>
         }
       />
       <BottomNavigationAction
         label={
-          <Typography variant="body2" style={{ color: "#D13E24" }}>
+          <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Notifications
           </Typography>
         }
@@ -68,14 +77,14 @@ export default function Navigation() {
             class={`fa-regular fa-bell`}
             style={{
               fontSize: "1.5rem",
-              color: `${value === "Notifications" ? "red" : "gray"}`,
+              color: `${value === "Notifications" ? "#E1E1E1" : "#E1E1E1"}`,
             }}
           ></i>
         }
       />
       <BottomNavigationAction
         label={
-          <Typography variant="body2" style={{ color: "#D13E24" }}>
+          <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Analytics
           </Typography>
         }
@@ -83,7 +92,7 @@ export default function Navigation() {
         sx={{
           "&.Mui-selected": {
             // styles for the selected item
-            color: "#F9F9FA", // change to your desired color
+            color: "#E1E1E1", // change to your desired color
           },
         }}
         icon={
@@ -91,7 +100,7 @@ export default function Navigation() {
             class="fa-solid fa-chart-simple"
             style={{
               fontSize: "1.5rem",
-              color: `${value === "Analytics" ? "red" : "gray"}`,
+              color: `${value === "Analytics" ? "#E1E1E1" : "#E1E1E1"}`,
             }}
           ></i>
         }

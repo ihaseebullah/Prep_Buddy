@@ -66,6 +66,14 @@ export default function Sidebar() {
 }
 
 export function NotificationsDrawer() {
+  const styles = {
+    background: "rgba(231, 231, 231, 0.65)",
+    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+    WebkitBackdropFilter: "blur(7px)", // For Webkit browsers
+    backdropFilter: "blur(7px)", // Standard backdrop-filter property
+    borderRadius: "10px",
+    border: "1px solid rgba(255, 255, 255, 0.18)",
+  };
   const {
     bottomBar: state,
     setbottomBar: setState,
@@ -77,18 +85,152 @@ export function NotificationsDrawer() {
     setState(!state);
   };
   const list = () => (
-    <Box
-      sx={{ width: 360, height: 800 }}
-      role="presentation"
-      onKeyDown={toggleDrawer}
-    >
+    <Box sx={{ height: 600 }} role="presentation" onKeyDown={toggleDrawer}>
       {/* <Skeleton variant="circular" height={120} width={120}/> */}
-      <div className="flex p-2 pb-0 justify-center">
-        <Skeleton width={"6rem"} height={"0.5rem"}/>
+      <div
+        className="shadow"
+        style={{
+          position: "fixed",
+          zIndex: 1000,
+          background: "rgba(231, 231, 231, 0.65)",
+          WebkitBackdropFilter: "blur(9px)", // For Webkit browsers
+          backdropFilter: "blur(9px)", // Standard backdrop-filter property
+          width: "22.5rem",
+          borderBottomLeftRadius: "0.5rem",
+          borderBottomRightRadius: "0.5rem",
+        }}
+      >
+        <div className="flex p-2 pb-0 justify-center">
+          <Skeleton width={"6rem"} height={"0.5rem"} />
+        </div>
+        <h3
+          className="text-center"
+          style={{ fontFamily: "Roboto", fontSize: "1.3rem" }}
+        >
+          Notifications
+        </h3>
       </div>
-      <h3 className="text-center" style={{fontFamily:"Roboto",fontSize:"1.3rem"}}>Notifications</h3>
-
       <List>
+        <div className="p-2 pt-10 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
+        <div className="p-2 py-1 ">
+          <ListItem
+            key={"8234789"}
+            className="bg-gray-100 rounded shadow-md"
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
+              <p style={{ fontFamily: "Nunito" }}>
+                Hey user buy as much as possible because i wanna rob you with
+                this app as much as i can.
+              </p>
+            </ListItemButton>
+          </ListItem>
+        </div>
         <div className="p-2 py-1 ">
           <ListItem
             key={"8234789"}
@@ -127,18 +269,19 @@ export function NotificationsDrawer() {
             <ListItemButton>
               <ListItemIcon disablePadding>{<img src={bell} />}</ListItemIcon>
               <p style={{ fontFamily: "Nunito" }}>
-                Learn unlearn and relearn that is where you are better than any Ai that can ever be developed.
+                Learn unlearn and relearn that is where you are better than any
+                Ai that can ever be developed.
               </p>
             </ListItemButton>
           </ListItem>
         </div>
-        
       </List>
     </Box>
   );
   return (
     <div>
       <SwipeableDrawer
+        style={styles}
         anchor={"bottom"}
         open={state}
         onClose={toggleDrawer}

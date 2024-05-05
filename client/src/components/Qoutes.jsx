@@ -5,12 +5,12 @@ import { quotes } from "../assets/data/qoutes";
 export function CarouselTransition() {
   const [qoutesData, setQoutesData] = useState(quotes);
   return (
-    <Carousel transition={{ duration: 2 }} className="rounded-xl">
+    <Carousel transition={{ duration: 0.5 }} className="rounded-xl">
       {[1, 2, 3, 4, 5].map((qoute) => {
         return (
           <div className="relative h-full w-full">
             <img
-              src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+              src="https://images.unsplash.com/photo-1550418290-a8d86ad674a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
               alt="image 1"
               className="h-full w-full object-cover"
             />
