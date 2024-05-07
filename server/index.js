@@ -5,6 +5,7 @@ const cors = require('cors');
 const bcrypt = require("bcrypt");
 const session = require('express-session');
 const { connectToDb } = require('./controllers/Connection_to_DB');
+const { loadBulkData } = require('./controllers/LoadBulkData');
 //Initialization
 const app = express();
 app.use(cors({
@@ -30,7 +31,7 @@ database_Connection();
 app.get('/', async function (req, res) {
     res.json({ message: 'Hello World' });
 })
-
+app.get('/loadNewData', loadBulkData)
 app.listen(3000, function (err) {
     console.log('listening on port 3000');
 })

@@ -32,7 +32,7 @@ export default function SelectedSubject({ subject }) {
         className="min-h-screen"
       >
         <SubjectHeader subject={subject} />
-        <ChapersList />
+        <ChapersList subject={subject}/>
       </div>
     </Page>
   );

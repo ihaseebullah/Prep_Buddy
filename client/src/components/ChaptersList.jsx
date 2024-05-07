@@ -1,6 +1,9 @@
 import { Grid, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
-export default function ChapersList() {
+export default function ChapersList({ subject }) {
+  const NavigateTo = useNavigate();
+
   const containerStyle = {
     background: "rgba(53, 83, 191, 0.6)",
     boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.5)",
@@ -28,6 +31,7 @@ export default function ChapersList() {
       <div className="">
         {[...Array(20).keys()].map((index) => (
           <div
+            onClick={() => NavigateTo(`/QUIZ/${subject}`)}
             style={{ background: "rgba(240, 240, 240, 0.5)" }}
             key={index}
             className=" my-2 bg-gray-200  rounded p-3"
@@ -44,7 +48,7 @@ export default function ChapersList() {
                   style={{ background: "rgba(53, 83, 191, 0.8)" }}
                   className="rounded-lg bg-blue-700 p-1 shadow-md text-gray-200"
                 >
-                  Go to
+                  Attempt
                 </button>
               </Grid>
             </Grid>
