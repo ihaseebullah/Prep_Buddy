@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Questions } = require("../Database/QuestionSchema");
+const { English_Questions } = require("../Database/QuestionSchema");
 const questions = require("../Database/Questions").questions
 function transformToComponentCompatible(originalData, developerData) {
     const {
@@ -64,29 +64,41 @@ JSON.parse(questions).map((yourData) => {
 })
 
 
-async function loadBulkData() {
+async function loadBulkData(req, res) {
+    const { subject } = req.params;
     try {
-        FormattedData.forEach(async (question) => {
-            const newQuestion = new Questions({
+        let i = 0;
+        for (const question of FormattedData) {
+            const insertable = {
                 question: question.question,
                 questionType: question.questionType,
                 answerSelectionType: question.answerSelectionType,
                 answers: question.answers,
-                correctAnswer: question.correctAnswer,
+                correctAnswer: (question.correctAnswer),
                 messageForCorrectAnswer: question.messageForCorrectAnswer,
                 messageForIncorrectAnswer: question.messageForIncorrectAnswer,
                 explanation: question.explanation,
-                point: question.point,
+                point: (question.point),
                 subject: "English"
-            });
-            await newQuestion.save()
-        }).then(() => {
-            console.log("All the questions are feeded to the DB")
-        })
+            };
 
-    } catch (e) {
-        console.log(e)
+            if (subject === "English") {
+                try {
+                    const newQuestion = new English_Questions(insertable);
+                    await newQuestion.save();
+                    console.log("Data Feeded " + i);
+                    i++;
+                } catch (e) {
+                    console.error("Error saving question:", e.message);
+                }
+            }
+        }
+        res.status(200).json({ message: `${i} number of MCQs data has been uploaded successfully` });
+    } catch (error) {
+        console.error("Error loading bulk data:", error);
+        res.status(500).json({ error: "An error occurred while loading bulk data" });
     }
 }
+
 
 module.exports = { loadBulkData }

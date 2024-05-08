@@ -5,7 +5,7 @@ import MainContextProvider from "./Context/Context";
 import Router from "./router/Router";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:3000";
+  axios.defaults.baseURL = "http://192.168.10.12:3000";
   axios.defaults.withCredentials = false;
   return (
     <MainContextProvider>

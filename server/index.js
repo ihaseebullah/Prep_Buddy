@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const session = require('express-session');
 const { connectToDb } = require('./controllers/Connection_to_DB');
 const { loadBulkData } = require('./controllers/LoadBulkData');
+const { getQuiz } = require('./controllers/getQuiz');
 //Initialization
 const app = express();
 app.use(cors({
@@ -27,11 +28,14 @@ app.use(session({
 const database_Connection = connectToDb
 //connection to database server
 database_Connection();
+//Adding new Questions in bulk
+app.get('/loadNewData/:subject', loadBulkData)
+
 //Routes
 app.get('/', async function (req, res) {
     res.json({ message: 'Hello World' });
 })
-app.get('/loadNewData', loadBulkData)
+app.get('/getQuiz/:subject/:noOfMcqs', getQuiz)
 app.listen(3000, function (err) {
     console.log('listening on port 3000');
 })
