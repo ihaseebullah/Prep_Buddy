@@ -8,5 +8,8 @@
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.3"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
   }
 }

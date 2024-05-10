@@ -7,32 +7,21 @@ import physics from "../assets/img/relativity.png";
 import english from "../assets/img/eng.png";
 import SubjectHeader from "../components/SubjectHeader";
 import ChapersList from "../components/ChaptersList";
+import background from "../assets/img/background.jpg";
 export default function SelectedSubject({ subject }) {
   return (
     <Page>
       <div
         style={{
-          backgroundImage: `url(${
-            subject === "Math"
-              ? math
-              : subject === "Biology"
-              ? biology
-              : subject === "Chemistry"
-              ? chemistry
-              : subject === "Physics"
-              ? physics
-              : subject === "English"
-              ? english
-              : null
-          })`,
+          backgroundImage: `url(${background})`,
+          backgroundRepeat: false,
           margin: "-1rem",
-          marginTop: "-3rem",
+          marginTop: "-3.5rem",
           zIndex: -1,
         }}
-        className="min-h-screen"
+        className="pb-10"
       >
-        <SubjectHeader subject={subject} />
-        <ChapersList subject={subject}/>
+        <ChapersList subject={subject} />
       </div>
     </Page>
   );
