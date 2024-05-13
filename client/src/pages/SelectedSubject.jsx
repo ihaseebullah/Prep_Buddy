@@ -8,6 +8,7 @@ import english from "../assets/img/eng.png";
 import SubjectHeader from "../components/SubjectHeader";
 import ChapersList from "../components/ChaptersList";
 import background from "../assets/img/background.jpg";
+import OptionsPage from "../components/OptionsPage";
 export default function SelectedSubject({ subject }) {
   return (
     <Page>
@@ -19,9 +20,8 @@ export default function SelectedSubject({ subject }) {
           marginTop: "-3.5rem",
           zIndex: -1,
         }}
-        className="pb-10"
       >
-        <ChapersList subject={subject} />
+        <OptionsPage subject={subject} />
       </div>
     </Page>
   );

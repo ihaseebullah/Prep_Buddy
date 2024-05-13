@@ -15,12 +15,12 @@ export default function SubjectHeader({ subject }) {
     <div style={containerStyle} className="p-2">
       <Typography
         className="text-gray-800"
-        variant="h6"
+        variant="h1"
         fontFamily="Nunito"
         fontSize="1.5rem"
         color={"white"}
       >
-        {subject}: Chapters
+        {subject}: Customize Your Quiz
       </Typography>
     </div>
   );

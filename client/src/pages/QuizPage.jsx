@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 export default function QuizPage() {
   const [quizData, setQuizData] = useState({});
+  const [quizResults, setQuizResults] = useState({});
   useEffect(() => {
     axios.get("/getQuiz/English/4").then((res) => {
       setQuizData({
@@ -26,7 +27,13 @@ export default function QuizPage() {
   //   questions: [...FormattedData],
   // };
   return quizData.quizTitle && quizData.questions.length > 0 ? (
-    <Quiz quiz={quizData} shuffle={true} allowPauseTimer={true} timer={60} />
+    <Quiz
+      quiz={quizData}
+      shuffle={true}
+      allowPauseTimer={true}
+      timer={60}
+      onComplete={handleQuizResults}
+    />
   ) : (
     <div className="flex justify-center items-center min-h-screen">
       <div className="flex flex-col items-center">
