@@ -1,5 +1,5 @@
 import { Avatar, Grid } from "@mui/material";
-import IconButton from "./IconButtons";
+import IconButtons from "./IconButtons";
 
 export default function Banner() {
   return (
@@ -15,10 +15,10 @@ export default function Banner() {
           <div dir="ltr">
             <Grid container className="ps-[5%]" spacing={1}>
               <Grid item xs={6}>
-                <IconButton />
+                <IconButtons />
               </Grid>
               <Grid item xs={6}>
-                <IconButton icon={"bell"} />
+                <IconButtons icon={"bell"} />
               </Grid>
             </Grid>
           </div>

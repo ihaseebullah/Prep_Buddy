@@ -58,12 +58,13 @@ function SubjectCarousale() {
         "::-webkit-scrollbar": { display: "hidden" },
       }}
     >
-      {data.map((item) => (
+      {data.map((item, i) => (
         <button
           onClick={() => {
             NavigateTo(`/selectedSubject/${item.title}`);
             setValue(false);
           }}
+          key={i}
         >
           <Card
             className="shadow-md"
