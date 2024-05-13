@@ -4,14 +4,15 @@ import SubjectHeader from "./SubjectHeader";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { MainContext } from "../Context/Context";
+import { QuizContext } from "../Context/QuizContext";
 export default function OptionsPage({ subject }) {
   const [optionsForm, setOptionsForm] = useState({
     difficultyLevel: "Learning Lagoon",
     numberOfQuestions: 10,
     topics: [],
   });
-  const { setQuizData } = useContext(MainContext);
-  
+  const { setQuizData } = useContext(QuizContext);
+
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
   };
@@ -43,15 +44,22 @@ export default function OptionsPage({ subject }) {
   const handleSubmit = () => {
     axios
       .post("/getQuiz/", { ...optionsForm, subject: subject }, { headers })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
+        const data = await res.data.quizContent;
         setQuizData({
           quizTitle: "English Test",
           quizSynopsis:
             "Start the quiz, read each question carefully, and select your answer. Once submitted, answers cannot be changed, so choose wisely. Proceed through all questions, then submit your quiz for evaluation. Review your results and use feedback to improve. Enjoy the quiz-taking experience!",
-          questions: [...res.data.quizContent],
+          questions: [...data],
         });
-        NavigateTo('/QUIZ')
+        console.log({
+          quizTitle: "English Test",
+          quizSynopsis:
+            "Start the quiz, read each question carefully, and select your answer. Once submitted, answers cannot be changed, so choose wisely. Proceed through all questions, then submit your quiz for evaluation. Review your results and use feedback to improve. Enjoy the quiz-taking experience!",
+          questions: [...data],
+        });
+        NavigateTo("/QUIZ");
       });
   };
   return (

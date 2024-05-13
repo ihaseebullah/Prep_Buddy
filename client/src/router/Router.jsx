@@ -14,13 +14,14 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/QUIZ/" element={<QuizPage />} />
+        <Route path="/QUIZ" element={<QuizPage />} />
         <Route
           path="/*"
           element={
             <Page>
               <Typography>
-                Roor bas lag sbar rata oka pa dai page kar shoro di.English Check ka!
+                Roor bas lag sbar rata oka pa dai page kar shoro di.English
+                Check ka!
               </Typography>
             </Page>
           }

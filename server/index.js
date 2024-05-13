@@ -76,7 +76,7 @@ app.post("/ai", async (req, res) => {
   }
 });
 
-app.get("/getQuiz/:subject/:noOfMcqs", getQuiz);
+app.post("/getQuiz/", getQuiz);
 app.listen(3000, function (err) {
   console.log("listening on port 3000");
 });

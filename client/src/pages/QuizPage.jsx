@@ -6,9 +6,10 @@ import FormattedData from "../assets/data/questions";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { MainContext } from "../Context/Context";
+import { QuizContext } from "../Context/QuizContext";
 export default function QuizPage() {
   const [quizResults, setQuizResults] = useState({});
-  const { quizData } = useContext(MainContext);
+  const { quizData } = useContext(QuizContext);
   // useEffect(() => {
   //   axios.get("/getQuiz/English/4").then((res) => {
   //     setQuizData({
@@ -37,7 +38,7 @@ export default function QuizPage() {
       shuffle={true}
       allowPauseTimer={true}
       timer={60}
-      onComplete={handleQuizResults}
+      // onComplete={handleQuizResults}
     />
   ) : (
     <div className="flex justify-center items-center min-h-screen">
