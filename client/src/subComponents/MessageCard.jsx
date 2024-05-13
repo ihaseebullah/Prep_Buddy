@@ -26,6 +26,7 @@ const MessageCard = ({ role, message, type }) => {
             borderRadius: 1,
             display: "flex",
             alignItems: "center",
+            background: "rgba(248, 255, 253, 0.34)",
           }}
         >
           {isLoading ? (

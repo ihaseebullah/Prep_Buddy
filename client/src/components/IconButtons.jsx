@@ -19,6 +19,7 @@ import IconButton from "@mui/material/IconButton";
 import { MainContext } from "../Context/Context";
 import MessageCard from "../subComponents/MessageCard";
 import CloseIcon from "@mui/icons-material/Close";
+import background from "../assets/img/background.jpg";
 
 export default function IconButtons(props) {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -100,10 +101,36 @@ export default function IconButtons(props) {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{ width: "100vw", overflow: "auto" }}
+          style={{ backgroundImage: `url(${background})` }}
         >
-          <Paper sx={{ height: "100vh" }}>
-            <Paper ref={paperRef} style={{ overflow: "auto" }}>
+          <Paper
+            sx={{
+              height: "100vh",
+              width: "100vw",
+              background: "rgba(248, 255, 253, 0.14)",
+              boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+              backdropFilter: "blur(8.4px)",
+              WebkitBackdropFilter: "blur(8.4px)",
+              border: "1px solid rgba(248, 255, 253, 0.17)",
+            }}
+          >
+            <Paper
+              ref={paperRef}
+              style={{
+                overflow: "auto",
+              }}
+              sx={{
+                width: "100vw",
+                overflow: "auto",
+                background: "rgba(248, 255, 253, 0.14)",
+                borderBottomLeftRadius: "16px",
+                borderBottomRightRadius: "16px",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                backdropFilter: "blur(8.4px)",
+                WebkitBackdropFilter: "blur(8.4px)",
+                border: "1px solid rgba(248, 255, 253, 0.17)",
+              }}
+            >
               <Box
                 width="100%"
                 display="flex"
@@ -115,7 +142,6 @@ export default function IconButtons(props) {
                   <CloseIcon />
                 </IconButton>
               </Box>
-              <Divider />
               <List sx={{ height: "80vh" }}>
                 {chat.map((singleChat, i) => (
                   <ListItem
@@ -149,35 +175,46 @@ export default function IconButtons(props) {
                   )}
                 </ListItem>
               </List>
-              <Divider />
             </Paper>
-            <form onSubmit={formSubmission}>
-              <Box display="flex" sx={{ margin: "1rem 1rem" }}>
-                <TextField
-                  sx={{
-                    border: "none",
-                    width: "100%",
-                    marginRight: "1rem",
-                    color: "black",
-                    boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-                  }}
-                  value={input}
-                  onChange={inputChangeHandler}
-                  placeholder="Your prompt..."
-                  required
-                />
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "black",
-                  }}
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  send
-                </Button>
-              </Box>
-            </form>
+            <Paper
+              sx={{
+                width: "100vw",
+                background: "rgba(248, 255, 253, 0.14)",
+                borderRadius: "16px",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                backdropFilter: "blur(8.4px)",
+                WebkitBackdropFilter: "blur(8.4px)",
+                border: "1px solid rgba(248, 255, 253, 0.17)",
+                marginTop: "0.6rem",
+              }}
+            >
+              <form onSubmit={formSubmission}>
+                <Box display="flex" sx={{ margin: "1rem 1rem" }}>
+                  <TextField
+                    sx={{
+                      border: "none",
+                      width: "100%",
+                      marginRight: "1rem",
+                      color: "black",
+                    }}
+                    value={input}
+                    onChange={inputChangeHandler}
+                    placeholder="Your prompt..."
+                    required
+                  />
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "black",
+                    }}
+                    type="submit"
+                    disabled={isLoading}
+                  >
+                    send
+                  </Button>
+                </Box>
+              </form>
+            </Paper>
           </Paper>
         </Modal>
       )}
