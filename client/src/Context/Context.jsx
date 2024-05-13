@@ -8,6 +8,9 @@ export default function MainContextProvider(props) {
   const [value, setValue] = useState("Home");
   const [showResult, setShowResult] = useState(false);
   const [bottomBar, setbottomBar] = useState(false);
+  const [headers, setHeaders] = useState({
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  });
   return (
     <MainContext.Provider
       value={{
@@ -19,6 +22,7 @@ export default function MainContextProvider(props) {
         setValue,
         showResult,
         setShowResult,
+        headers,
       }}
     >
       {props.children}
