@@ -1,11 +1,20 @@
 import { Button, Checkbox, Chip, Grid, Stack, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import SubjectHeader from "./SubjectHeader";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { MainContext } from "../Context/Context";
 export default function OptionsPage({ subject }) {
   const [optionsForm, setOptionsForm] = useState({
     difficultyLevel: "Learning Lagoon",
+    numberOfQuestions: 10,
+    topics: [],
   });
+  const { setQuizData } = useContext(MainContext);
+  
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  };
   const NavigateTo = useNavigate();
   const difficultyLevels = [
     "Learning Lagoon",
@@ -30,6 +39,20 @@ export default function OptionsPage({ subject }) {
       });
       setOptionsForm({ ...optionsForm, topics: newArray });
     }
+  };
+  const handleSubmit = () => {
+    axios
+      .post("/getQuiz/", { ...optionsForm, subject: subject }, { headers })
+      .then((res) => {
+        console.log(res.data);
+        setQuizData({
+          quizTitle: "English Test",
+          quizSynopsis:
+            "Start the quiz, read each question carefully, and select your answer. Once submitted, answers cannot be changed, so choose wisely. Proceed through all questions, then submit your quiz for evaluation. Review your results and use feedback to improve. Enjoy the quiz-taking experience!",
+          questions: [...res.data.quizContent],
+        });
+        NavigateTo('/QUIZ')
+      });
   };
   return (
     <div
@@ -169,8 +192,15 @@ export default function OptionsPage({ subject }) {
                   style={{ display: "flex", justifyContent: "flex-end" }}
                 >
                   <Button
-                    disabled={!optionsForm.oath ? true : false}
-                    variant="contained"
+                    disabled={
+                      optionsForm.oath &&
+                      optionsForm.topics?.length > 0 &&
+                      optionsForm.numberOfQuestions
+                        ? false
+                        : true
+                    }
+                    variant="outlined"
+                    onClick={handleSubmit}
                     size="small"
                     endIcon={<i class="fa-solid fa-play"></i>}
                   >
