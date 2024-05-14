@@ -2,43 +2,63 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const bcrypt = require("bcrypt");
 const session = require("express-session");
 const { connectToDb } = require("./controllers/Connection_to_DB");
 const { loadBulkData } = require("./controllers/LoadBulkData");
 const { getQuiz } = require("./controllers/getQuiz");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { Signup } = require('./controllers/Signup');
+const { Login } = require("./controllers/Login");
+const cookieParser = require("cookie-parser");
+const jwt = require('jsonwebtoken')
 //Initialization
 const app = express();
+app.use(cookieParser())
 app.use(
-  cors({
-    origin: "*",
-    credentials: true,
+  session({
+    secret: process.env.SESSION_SECRET,
+    saveUninitialized: true,
+    resave: true,
+    maxAge: 2 * 60 * 1000,
   })
 );
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 3,
-      httpOnly: true,
-      secure: false,
-    },
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
 );
+
 //Controllers
 const database_Connection = connectToDb;
 //connection to database server
 database_Connection();
+function loginUser(req, res, next) {
+  if (!req.session.user) {
+    const token = req.cookies?.jwt;
+    if (token) {
+      try {
+        jwt.verify(token, process.env.SESSION_SECRET, {}, (err, user) => {
+          if (err) throw err;
+          req.session.USER = user.user;
+        });
+        next();
+      } catch (err) {
+        res.status(401).json({ message: err.message, });
+      }
+      return;
+    } else {
+      res.status(403).json({ message: "Please Login First" });
+    }
+  }
+}
 //Adding new Questions in bulk
 app.get("/loadNewData/:subject", loadBulkData);
 
 //Routes
-app.get("/", async function (req, res) {
-  res.json({ message: "Hello World" });
+app.get("/", loginUser, (req, res) => {
+  res.status(200).json({ user: req.session.USER })
 });
 
 // ai integration
@@ -47,7 +67,6 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const generate = async (userPrompt, chatHistory) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
     const chat = model.startChat({
       history: chatHistory,
     });
@@ -80,6 +99,9 @@ app.post("/getQuiz/", getQuiz);
 // app.post('/quiz/results',async function(req,res)=>{
 
 // })
+
+app.post('/api/signup/', Signup)
+app.post('/api/auth/login', Login)
 app.listen(3000, function (err) {
   console.log("listening on port 3000");
 });

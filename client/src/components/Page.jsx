@@ -1,3 +1,4 @@
+import axios from "axios";
 import Footer from "./Footer";
 import Sidebar, { NotificationsDrawer } from "./Sidebar";
 

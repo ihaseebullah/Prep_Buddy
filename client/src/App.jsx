@@ -4,15 +4,18 @@ import Home from "./pages/Home";
 import MainContextProvider from "./Context/Context";
 import Router from "./router/Router";
 import QuizContextProvider from "./Context/QuizContext";
+import AuthContextProvider from "./Context/AuthContext";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:3000";
-  axios.defaults.withCredentials = false;
+  axios.defaults.withCredentials = true;
   return (
     <MainContextProvider>
-      <QuizContextProvider>
-        <Router />
-      </QuizContextProvider>
+      <AuthContextProvider>
+        <QuizContextProvider>
+          <Router />
+        </QuizContextProvider>
+      </AuthContextProvider>
     </MainContextProvider>
   );
 }

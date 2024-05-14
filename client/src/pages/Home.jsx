@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Page from "../components/Page";
 
 import Banner from "../components/Banner";
@@ -6,9 +6,29 @@ import Pill from "../components/Pill";
 import { Divider } from "@mui/material";
 import SubjectCarousaleWrapper from "../components/SubjectCarousale";
 import { CarouselTransition } from "../components/Qoutes";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 // import SubjectCard from "../components/SubjectCards";
 
 export default function Home() {
+  const NavigateTo = useNavigate();
+  const { isLoggedIn, setIsLoggedin, userData, setUserData } =
+    useContext(AuthContext);
+  const loginUser = async () => {
+    try {
+      const res = await axios.get("/");
+    } catch (err) {
+      if (err.response.status) {
+        setIsLoggedin(false);
+        setUserData({});
+        NavigateTo("/login");
+      }
+    }
+  };
+  useEffect(() => {
+    loginUser();
+  }, []);
   return (
     <Page>
       <Banner />
@@ -22,7 +42,7 @@ export default function Home() {
       >
         Great sayings:
       </h1>
-      <div style={{paddingBottom:"10rem"}}>
+      <div style={{ paddingBottom: "10rem" }}>
         <CarouselTransition />
       </div>
     </Page>
