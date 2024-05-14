@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import Sidebar, { NotificationsDrawer } from "./Sidebar";
 
 export default function Page(props) {
+  
   return (
     <div
       style={{ backgroundColor: "#F1F2F3" }}

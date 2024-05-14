@@ -9,20 +9,23 @@ import SubjectHeader from "../components/SubjectHeader";
 import ChapersList from "../components/ChaptersList";
 import background from "../assets/img/background.jpg";
 import OptionsPage from "../components/OptionsPage";
+import Authenticator from "../components/Authenticator";
 export default function SelectedSubject({ subject }) {
   return (
-    <Page>
-      <div
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundRepeat: false,
-          margin: "-1rem",
-          marginTop: "-3.5rem",
-          zIndex: -1,
-        }}
-      >
-        <OptionsPage subject={subject} />
-      </div>
-    </Page>
+    <Authenticator>
+      <Page>
+        <div
+          style={{
+            backgroundImage: `url(${background})`,
+            backgroundRepeat: false,
+            margin: "-1rem",
+            marginTop: "-3.5rem",
+            zIndex: -1,
+          }}
+        >
+          <OptionsPage subject={subject} />
+        </div>
+      </Page>
+    </Authenticator>
   );
 }
