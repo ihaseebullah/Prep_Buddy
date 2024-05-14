@@ -38,7 +38,7 @@ export default function Navigation() {
         value="Home"
         icon={
           <i
-            class="fa-solid fa-house"
+            className="fa-solid fa-house"
             style={{
               fontSize: "1.5rem",
               color: `${value === "Home" ? "#E1E1E1" : "#E1E1E1"}`,
@@ -74,7 +74,7 @@ export default function Navigation() {
         value="Notifications"
         icon={
           <i
-            class={`fa-regular fa-bell`}
+            className={`fa-regular fa-bell`}
             style={{
               fontSize: "1.5rem",
               color: `${value === "Notifications" ? "#E1E1E1" : "#E1E1E1"}`,
@@ -97,7 +97,7 @@ export default function Navigation() {
         }}
         icon={
           <i
-            class="fa-solid fa-chart-simple"
+            className="fa-solid fa-chart-simple"
             style={{
               fontSize: "1.5rem",
               color: `${value === "Analytics" ? "#E1E1E1" : "#E1E1E1"}`,

@@ -8,7 +8,10 @@ export function CarouselTransition() {
     <Carousel transition={{ duration: 0.5 }} className="rounded-xl">
       {[1, 2, 3, 4, 5].map((qoute) => {
         return (
-          <div className="relative h-full w-full">
+          <div
+            className="relative h-full w-full"
+            key={Math.floor(Math.random() * 100)}
+          >
             <img
               src="https://images.unsplash.com/photo-1550418290-a8d86ad674a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
               alt="image 1"

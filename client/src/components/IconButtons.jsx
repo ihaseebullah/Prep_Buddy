@@ -228,7 +228,7 @@ export default function IconButtons(props) {
               setSideBarState(true);
             }}
           >
-            <i class="fa-solid fa-bars text-[1.4rem]"></i>
+            <i className="fa-solid fa-bars text-[1.4rem]"></i>
           </button>
         ) : (
           <button onClick={handleOpen}>

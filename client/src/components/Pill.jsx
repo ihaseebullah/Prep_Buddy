@@ -66,7 +66,7 @@ export default function Pill() {
                 style={{ backgroundColor: "#3B4483" }}
               >
                 <i
-                  class="fa-solid fa-clipboard-list"
+                  className="fa-solid fa-clipboard-list"
                   style={{ fontSize: "2rem", color: "white" }}
                 ></i>
               </div>
