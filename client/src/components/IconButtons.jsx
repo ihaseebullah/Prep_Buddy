@@ -135,14 +135,15 @@ export default function IconButtons(props) {
                 width="100%"
                 display="flex"
                 justifyContent="space-between"
-                alignItems="center"
+                alignItems="flex-start"
               >
                 <Typography sx={{ margin: "1rem 1rem" }}>DDev</Typography>
                 <IconButton onClick={handleClose}>
                   <CloseIcon />
                 </IconButton>
               </Box>
-              <List sx={{ height: "80vh" }}>
+              <Divider />
+              <List sx={{ height: "72vh" }}>
                 {chat.map((singleChat, i) => (
                   <ListItem
                     sx={{
@@ -192,7 +193,7 @@ export default function IconButtons(props) {
                 <Box display="flex" sx={{ margin: "1rem 1rem" }}>
                   <TextField
                     sx={{
-                      border: "none",
+                      marginTop: "0.2rem",
                       width: "100%",
                       marginRight: "1rem",
                       color: "black",
@@ -200,12 +201,20 @@ export default function IconButtons(props) {
                     value={input}
                     onChange={inputChangeHandler}
                     placeholder="Your prompt..."
+                    variant="standard"
+                    multiline
+                    maxRows="2"
                     required
                   />
                   <Button
                     variant="contained"
                     sx={{
-                      backgroundColor: "black",
+                      // backgroundColor: "black",
+                      backgroundColor: "rgba(0, 0, 0, 0.64)",
+                      boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                      backdropFilter: "blur(8.4px)",
+                      WebkitBackdropFilter: "blur(8.4px)",
+                      border: "1px solid rgba(248, 255, 253, 0.17)",
                     }}
                     type="submit"
                     disabled={isLoading}

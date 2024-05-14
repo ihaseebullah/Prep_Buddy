@@ -10,7 +10,7 @@ const MessageCard = ({ role, message, type }) => {
   const isLoading = type === "loading";
   return (
     <>
-      <Box display="flex" flexDirection="row" width="90%" margin="0.6rem 0">
+      <Box display="flex" flexDirection="row"  margin="0.6rem 1rem" marginRight='1rem' width= "95%">
         {isHuman ? (
           <Avatar alt="human" src="/images/humanavatar.png" />
         ) : (
@@ -22,11 +22,12 @@ const MessageCard = ({ role, message, type }) => {
           minHeight="3rem"
           sx={{
             backgroundColor: "#e5e2e2de",
-            marginLeft: "1rem",
+            marginLeft: "0.6rem",
             borderRadius: 1,
             display: "flex",
             alignItems: "center",
             background: "rgba(248, 255, 253, 0.34)",
+            
           }}
         >
           {isLoading ? (
