@@ -26,6 +26,7 @@ export default function Home() {
       }
     }
   };
+
   useEffect(() => {
     loginUser();
   }, []);
@@ -37,7 +38,7 @@ export default function Home() {
       <SubjectCarousaleWrapper />
       <Divider className="py-1" />
       <h1
-        style={{ fontFamily: "Roboto,Kanit", fontSize: "1rem" }}
+        style={{ fontFamily: "Roboto,Kanit,Nunito", fontSize: "1rem" }}
         className="py-2"
       >
         Great sayings:
