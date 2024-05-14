@@ -7,13 +7,13 @@ const { connectToDb } = require("./controllers/Connection_to_DB");
 const { loadBulkData } = require("./controllers/LoadBulkData");
 const { getQuiz } = require("./controllers/getQuiz");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const { Signup } = require('./controllers/Signup');
+const { Signup } = require("./controllers/Signup");
 const { Login } = require("./controllers/Login");
 const cookieParser = require("cookie-parser");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 //Initialization
 const app = express();
-app.use(cookieParser())
+app.use(cookieParser());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -45,7 +45,7 @@ function loginUser(req, res, next) {
         });
         next();
       } catch (err) {
-        res.status(401).json({ message: err.message, });
+        res.status(401).json({ message: err.message });
       }
       return;
     } else {
@@ -58,7 +58,7 @@ app.get("/loadNewData/:subject", loadBulkData);
 
 //Routes
 app.get("/", loginUser, (req, res) => {
-  res.status(200).json({ user: req.session.USER })
+  res.status(200).json({ user: req.session.USER });
 });
 
 // ai integration
@@ -86,8 +86,6 @@ app.post("/ai", async (req, res) => {
   try {
     const prompt = req.body.prompt;
     const history = req.body.history;
-    console.log("prompt : ", prompt);
-    console.log("history : ", history);
     const result = await generate(prompt, history);
     res.status(200).json(result);
   } catch (error) {
@@ -100,8 +98,8 @@ app.post("/getQuiz/", getQuiz);
 
 // })
 
-app.post('/api/signup/', Signup)
-app.post('/api/auth/login', Login)
+app.post("/api/signup/", Signup);
+app.post("/api/auth/login", Login);
 app.listen(3000, function (err) {
   console.log("listening on port 3000");
 });
