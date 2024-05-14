@@ -21,9 +21,9 @@ export default function QuizPage() {
   //   });
   // }, []);
 
-  // const handleQuizResults=(quiz)=>{
-  //   // axios.post('/quiz/postResults/')
-  // }
+  const handleQuizResults=(quiz)=>{
+    console.log(quiz)
+  }
   // console.log(FormattedData);
   // const quizData = {
   //   quizTitle: "Practice Test",
@@ -37,8 +37,13 @@ export default function QuizPage() {
       quiz={quizData}
       shuffle={true}
       allowPauseTimer={true}
-      timer={60}
-      // onComplete={handleQuizResults}
+      // timer={
+      //   parseInt(quizData.optionsForm.time * 60) *
+      //   quizData.optionsForm.numberOfQuestions
+      // }
+      //Test Timer
+      timer={5}
+      onComplete={handleQuizResults}
     />
   ) : (
     <div className="flex justify-center items-center min-h-screen">
