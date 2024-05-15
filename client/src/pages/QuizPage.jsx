@@ -8,6 +8,7 @@ import axios from "axios";
 import { MainContext } from "../Context/Context";
 import { QuizContext } from "../Context/QuizContext";
 import Authenticator from "../components/Authenticator";
+import Loader from "../components/Loader";
 export default function QuizPage() {
   const [quizResults, setQuizResults] = useState({});
   const { quizData } = useContext(QuizContext);
@@ -40,20 +41,15 @@ export default function QuizPage() {
           quiz={quizData}
           shuffle={true}
           allowPauseTimer={true}
-          // timer={
-          //   parseInt(quizData.optionsForm.time * 60) *
-          //   quizData.optionsForm.numberOfQuestions
-          // }
+          timer={
+            parseInt(quizData.optionsForm.time * 60) *
+            quizData.optionsForm.numberOfQuestions
+          }
           //Test Timer
-          timer={5}
           onComplete={handleQuizResults}
         />
       ) : (
-        <div className="flex justify-center items-center min-h-screen">
-          <div className="flex flex-col items-center">
-            <CircularProgress />
-          </div>
-        </div>
+        <Loader />
       )}
     </Authenticator>
   );

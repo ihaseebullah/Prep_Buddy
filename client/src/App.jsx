@@ -7,7 +7,7 @@ import QuizContextProvider from "./Context/QuizContext";
 import AuthContextProvider from "./Context/AuthContext";
 
 function App() {
-  axios.defaults.baseURL = "http://localhost:3000";
+  axios.defaults.baseURL = "http://192.168.99.204:3000";
   axios.defaults.withCredentials = true;
   return (
     <MainContextProvider>

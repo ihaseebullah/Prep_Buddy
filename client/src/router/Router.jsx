@@ -21,7 +21,7 @@ export default function Router() {
     <BrowserRouter>
       <Toaster />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={isLoggedIn === true ? <Home /> : <Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route

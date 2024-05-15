@@ -12,7 +12,7 @@ export default function Authenticator({ children }) {
     try {
       const res = await axios.get("/");
     } catch (err) {
-      if (err.response.status) {
+      if (err.response.status === 403 || 401) {
         setIsLoggedin(false);
         setUserData({});
         NavigateTo("/login");
