@@ -1,7 +1,10 @@
 import { Avatar, Grid } from "@mui/material";
 import IconButtons from "./IconButtons";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Banner() {
+  const { userData } = useContext(AuthContext);
   return (
     <div className="">
       <Grid container>
@@ -29,7 +32,11 @@ export default function Banner() {
           style={{ fontFamily: "Nunito,Roboto,Kanit", fontSize: "1.8rem" }}
           className="pt-7"
         >
-          Hello, Haseeb Ullah!
+          Hi,{" "}
+          {userData.fullName
+            ? userData.fullName
+            : "User ain't have a full name"}
+          !
         </h1>
       </div>
     </div>

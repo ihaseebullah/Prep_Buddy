@@ -13,7 +13,9 @@ import { MainContext } from "../Context/Context";
 import { Avatar, Skeleton, Stack } from "@mui/material";
 import bell from "../assets/img/bell.gif";
 import avatar from "../assets/icons/avatar-svgrepo-com.svg";
+import { AuthContext } from "../Context/AuthContext";
 export default function Sidebar() {
+  const { userData } = React.useContext(AuthContext);
   const { sideBarState: state, setSideBarState: setState } =
     React.useContext(MainContext);
   const toggleDrawer = () => {
@@ -30,10 +32,15 @@ export default function Sidebar() {
       <div className="flex p-2 justify-center">
         <Stack spacing={1}>
           <Avatar
-            className="shadow-lg"
+            className="shadow-lg "
             style={{ height: "5rem", width: "5rem" }}
           />
-          <h3 className="text-center">Haseeb Ullah</h3>
+          <h3 className="text-center">
+            {" "}
+            {userData.fullName
+              ? userData.fullName
+              : "User ain't have a full name"}
+          </h3>
         </Stack>
       </div>
       <Divider />
@@ -118,7 +125,7 @@ export function NotificationsDrawer() {
             disablePadding
           >
             <ListItemButton>
-              <ListItemIcon >{<img src={bell} />}</ListItemIcon>
+              <ListItemIcon>{<img src={bell} />}</ListItemIcon>
               <p style={{ fontFamily: "Nunito" }}>
                 Hey user buy as much as possible because i wanna rob you with
                 this app as much as i can.
@@ -126,7 +133,6 @@ export function NotificationsDrawer() {
             </ListItemButton>
           </ListItem>
         </div>
-
       </List>
     </Box>
   );

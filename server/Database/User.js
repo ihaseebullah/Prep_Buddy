@@ -7,6 +7,9 @@ const user_schema = new mongoose.Schema({
     email: String,
     phone: String,
     dob: String,
+    userID: String,
+    userName: String,
+    results: [{ type: mongoose.Schema.ObjectId, ref: 'Result' }],
     subscription: { type: Boolean, default: false },
     lastSubscriptionDate: Date
 }, { timestamps: true })

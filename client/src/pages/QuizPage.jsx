@@ -9,31 +9,22 @@ import { MainContext } from "../Context/Context";
 import { QuizContext } from "../Context/QuizContext";
 import Authenticator from "../components/Authenticator";
 import Loader from "../components/Loader";
+import toast from "react-hot-toast";
+import { AuthContext } from "../Context/AuthContext";
 export default function QuizPage() {
   const [quizResults, setQuizResults] = useState({});
   const { quizData } = useContext(QuizContext);
-  // useEffect(() => {
-  //   axios.get("/getQuiz/English/4").then((res) => {
-  //     setQuizData({
-  //       quizTitle: "English Test",
-  //       quizSynopsis:
-  //         "Start the quiz, read each question carefully, and select your answer. Once submitted, answers cannot be changed, so choose wisely. Proceed through all questions, then submit your quiz for evaluation. Review your results and use feedback to improve. Enjoy the quiz-taking experience!",
-  //       questions: [...res.data.quizContent],
-  //     });
-  //   });
-  // }, []);
-
+  const { userData } = useContext(AuthContext);
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  };
   const handleQuizResults = (quiz) => {
     console.log(quiz);
+    axios
+      .post("/quiz/results", { ...quiz, userData }, { headers })
+      .then(toast.success("Data sent"));
   };
-  // console.log(FormattedData);
-  // const quizData = {
-  //   quizTitle: "Practice Test",
-  //   quizSynopsis:
-  //     "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim",
-  //   nrOfQuestions: "4",
-  //   questions: [...FormattedData],
-  // };
+
   return (
     <Authenticator>
       {quizData.quizTitle && quizData.questions.length > 0 ? (
@@ -41,11 +32,12 @@ export default function QuizPage() {
           quiz={quizData}
           shuffle={true}
           allowPauseTimer={true}
-          timer={
-            parseInt(quizData.optionsForm.time * 60) *
-            quizData.optionsForm.numberOfQuestions
-          }
+          // timer={
+          //   parseInt(quizData.optionsForm.time * 60) *
+          //   quizData.optionsForm.numberOfQuestions
+          // }
           //Test Timer
+          timer={5}
           onComplete={handleQuizResults}
         />
       ) : (

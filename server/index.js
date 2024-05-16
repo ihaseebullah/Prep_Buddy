@@ -11,6 +11,8 @@ const { Signup } = require("./controllers/Signup");
 const { Login } = require("./controllers/Login");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const { RESULT } = require("./Database/Results");
+const { USER } = require("./Database/User");
 //Initialization
 const app = express();
 app.use(cookieParser());
@@ -61,6 +63,50 @@ app.get("/", loginUser, (req, res) => {
   res.status(200).json({ user: req.session.USER });
 });
 
+//Generate new Quiz
+app.post("/getQuiz/", getQuiz);
+//Analytics
+app.get('/analytics', async function (req, res) {
+  const userId = '6644ef1694724918bcaca08d';
+  try {
+    // const results = await RESULT.find({ userID: userId }).sort({ _id: -1 }).limit(10);
+    const user = await USER.findById(userId).populate('results').exec()
+    res.status(200).json({ Analytics: { prevTestScores: user.results } });
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+//Save quiz results
+app.post('/quiz/results', async function (req, res) {
+  const userId = req.session.USER._id;
+  try {
+    const { totalPoints, correctPoints, userInput } = req.body;
+    const newResult = RESULT({
+      totalPoints: parseInt(totalPoints),
+      correctPoints: parseInt(correctPoints),
+      questionAttempted: userInput ? userInput.length : 0,
+      userID: userId,
+      userName: req.session.USER.username
+    })
+
+    await newResult.save().then(async (result) => {
+      const currentUser = await USER.findById(userId);
+      await USER.findByIdAndUpdate(userId, {
+        results: currentUser.results ? [...currentUser.results, result._id] : [result._id]
+      });
+      loginUser();
+      res.status(200).json({ success: true, message: "Results saved successfully" })
+    })
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+})
+
+app.get('/test', async (req, res) => {
+  const result = await USER.findById("6644ef1694724918bcaca08d")
+  // await USER.findByIdAndUpdate("6644ef1694724918bcaca08d", { results: [] })
+  res.status(200).json(result)
+})
 // ai integration
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -93,10 +139,6 @@ app.post("/ai", async (req, res) => {
   }
 });
 
-app.post("/getQuiz/", getQuiz);
-// app.post('/quiz/results',async function(req,res)=>{
-
-// })
 
 app.post("/api/signup/", Signup);
 app.post("/api/auth/login", Login);

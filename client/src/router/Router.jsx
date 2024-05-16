@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import { Toaster } from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import Analytics from "../pages/Analytics";
 
 export default function Router() {
   const { isLoggedIn, setIsLoggedin, userData, setUserData } =
@@ -27,6 +28,10 @@ export default function Router() {
         <Route
           path="/QUIZ"
           element={isLoggedIn === true ? <QuizPage /> : <Login />}
+        />
+        <Route
+          path="/Analytics"
+          element={isLoggedIn === true ? <Analytics /> : <Login />}
         />
         <Route
           path="/*"

@@ -2,14 +2,15 @@ const bcrypt = require('bcrypt')
 const { USER } = require('../Database/User')
 const salt = bcrypt.genSaltSync(10)
 async function Signup(req, res) {
-    const { username, password, fullname, email, phone, dob } = req.body;
+    const { username, password, fullName, email, phone, dob } = req.body;
+
     try {
         const newUser = new USER({
             username: username,
             phone,
             email,
             dob,
-            fullname,
+            fullName,
             password: bcrypt.hashSync(password, salt)
         });
 
@@ -23,6 +24,7 @@ async function Signup(req, res) {
             const errorMessages = Object.values(error.errors).map((val) => val.message);
             res.status(400).json({ success: false, error: errorMessages });
         } else {
+            console.log(error)
             res.status(500).json({ success: false, error: 'Internal Server Error' });
         }
     }

@@ -83,6 +83,7 @@ export default function Navigation() {
         }
       />
       <BottomNavigationAction
+        onClick={() => navigateTo("/Analytics")}
         label={
           <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Analytics
