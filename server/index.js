@@ -59,15 +59,15 @@ function loginUser(req, res, next) {
 app.get("/loadNewData/:subject", loadBulkData);
 
 //Routes
-app.get("/", loginUser, (req, res) => {
-  res.status(200).json({ user: req.session.USER });
+app.get("/", loginUser, async (req, res) => {
+  res.status(200).json({ user: await USER.findById(req.session.USER._id) });
 });
 
 //Generate new Quiz
 app.post("/getQuiz/", getQuiz);
 //Analytics
 app.get('/analytics', async function (req, res) {
-  const userId = '6644ef1694724918bcaca08d';
+  const userId = req.session.USER._id;
   try {
     // const results = await RESULT.find({ userID: userId }).sort({ _id: -1 }).limit(10);
     const user = await USER.findById(userId).populate('results').exec()
@@ -92,6 +92,7 @@ app.post('/quiz/results', async function (req, res) {
     await newResult.save().then(async (result) => {
       const currentUser = await USER.findById(userId);
       await USER.findByIdAndUpdate(userId, {
+        points: currentUser.points + parseInt(correctPoints),
         results: currentUser.results ? [...currentUser.results, result._id] : [result._id]
       });
       loginUser();
@@ -103,8 +104,9 @@ app.post('/quiz/results', async function (req, res) {
 })
 
 app.get('/test', async (req, res) => {
-  const result = await USER.findById("6644ef1694724918bcaca08d")
-  // await USER.findByIdAndUpdate("6644ef1694724918bcaca08d", { results: [] })
+  const result = await USER.find({})
+  // await USER.findByIdAndDelete("6644ef1694724918bcaca08d")
+  // const result=await RESULT.findById("6645f450ef1e9041ae041d4a")
   res.status(200).json(result)
 })
 // ai integration

@@ -2,13 +2,37 @@ const bcrypt = require('bcrypt');
 const { USER } = require('../Database/User');
 const salt = bcrypt.genSaltSync(10);
 const jwt = require('jsonwebtoken')
+function calculateDateDifference(dateString1, dateString2) {
+    // Convert date strings to Date objects
+    const date1 = new Date(dateString1);
+    const date2 = new Date(dateString2);
 
+    // Calculate the difference in milliseconds
+    const diffInMs = date2 - date1;
+
+    // Convert the difference from milliseconds to days
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    return diffInDays;
+}
 async function Login(req, res) {
     try {
         const { username, password } = req.body;
-        const user = await USER.findOne({ username });
+        let user = await USER.findOne({ username });
         if (user) {
             if (bcrypt.compareSync(password, user.password)) {
+                if (calculateDateDifference(user.lastLogin ? user.lastLogin : new Date(), new Date()) === 1) {
+                    await USER.findByIdAndUpdate(user._id, {
+                        streak: user.streak + 1,
+                        lastLogin: new Date(),
+                    })
+                } else {
+                    await USER.findByIdAndUpdate(user._id, {
+                        streak: 1,
+                        lastLogin: new Date(),
+                    })
+                }
+                user = await USER.findById(user._id)
                 req.session.USER = user;
                 jwt.sign({ user }, process.env.SESSION_SECRET, {}, (err, token) => {
                     res

@@ -11,7 +11,10 @@ const user_schema = new mongoose.Schema({
     userName: String,
     results: [{ type: mongoose.Schema.ObjectId, ref: 'Result' }],
     subscription: { type: Boolean, default: false },
-    lastSubscriptionDate: Date
+    lastSubscriptionDate: Date,
+    points: { type: Number, default: 0 },
+    streak: { type: Number, default: 0 },
+    lastLogin: Date,
 }, { timestamps: true })
 
 const USER = mongoose.model('User', user_schema)

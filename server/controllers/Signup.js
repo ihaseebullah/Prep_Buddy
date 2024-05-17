@@ -3,7 +3,6 @@ const { USER } = require('../Database/User')
 const salt = bcrypt.genSaltSync(10)
 async function Signup(req, res) {
     const { username, password, fullName, email, phone, dob } = req.body;
-
     try {
         const newUser = new USER({
             username: username,
@@ -15,6 +14,7 @@ async function Signup(req, res) {
         });
 
         await newUser.save().then(() => {
+            console.log(newUser)
             res.status(200).json({ success: true, newUser });
         });
     } catch (error) {

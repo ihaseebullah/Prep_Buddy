@@ -5,7 +5,7 @@ import r3 from "../assets/img/3rd.png";
 let images = [r1, r2, r3];
 export default function Leaderboard() {
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="mb-[5rem] rounded-md relative mt-3 overflow-x-auto shadow-md sm:rounded-lg">
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -40,7 +40,9 @@ export default function Leaderboard() {
                         />
                       </span>
                     ) : (
-                      <span className="font-semibold mx-4">{index + 1}</span>
+                      <span className="font-semibold mx-2">
+                        {index + 1}th&nbsp;
+                      </span>
                     )}
 
                     {/*  */}
@@ -57,6 +59,31 @@ export default function Leaderboard() {
               </tr>
             );
           })}
+          <tr
+            key={Math.random()}
+            style={{backgroundColor:"#3B4483"}}
+
+            className=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+          >
+            <th
+              scope="row"
+              className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              <span className="flex items-center">
+                <span className="font-semibold mx-2 text-white ">4123 &nbsp;</span>
+
+                {/*  */}
+                <span className="mx-3">
+                  <span className="font-semibold text-white ">You</span>
+                </span>
+              </span>
+            </th>
+
+            <td className="px-6 text-white py-4 font-semibold ">
+              {/* Modal toggle */}
+              7987
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
