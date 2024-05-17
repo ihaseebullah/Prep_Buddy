@@ -34,8 +34,8 @@ export default function ChapersList({ subject }) {
           <div
             onClick={() => NavigateTo(`/QUIZ/${subject}`)}
             style={{ background: "rgba(240, 240, 240, 0.5)" }}
-            key={index}
             className=" my-2  shadow  rounded-[1rem] p-3"
+            key={index}
           >
             <Grid container>
               <Grid item xs={8}>

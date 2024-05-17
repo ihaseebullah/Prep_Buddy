@@ -2,6 +2,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import Gauge from "./Gauge";
 import { AuthContext } from "../Context/AuthContext";
+import NumberCounter from "./NumberCounter";
 
 export default function GuageAndStreak({ percentage }) {
   const [gaugeTitleColor, setGaugeTitleColor] = useState("red");
@@ -16,55 +17,63 @@ export default function GuageAndStreak({ percentage }) {
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <Box
-            className="bg-gray-300 p-1 min-w-[8rem] text-center min-h-[8rem] shadow-md rounded-full"
+            className="bg-gray-300 p-1 min-w-[6rem] text-center min-h-[7.7rem] shadow-md rounded-lg"
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
           >
             <Gauge updateColor={handleUpdateColor} value={percentage} />
-
+          </Box>
+          <Box
+            className="bg-gray-300 mt-3 p-1 min-w-[6rem] text-center max-h-[4rem] shadow-md rounded-lg"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
             <Typography
-              fontSize={20}
+              fontSize={15}
               style={{
-                marginTop: "-1rem",
-                paddingBottom: "1.3rem",
                 color: "#1976D2",
               }}
               fontFamily={"Bungee Spice "}
               textAlign="center"
             >
-              {percentage}%
+              Performance {percentage}%
             </Typography>
           </Box>
         </Grid>
         <Grid item xs={6}>
           <Box
-            className="p-6 min-w-[11rem] text-center min-h-[11rem] shadow-md rounded-full"
+            className="bg-gray-300 p-1  min-w-[6rem] text-center max-h-[4rem] shadow-md rounded-lg"
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
             style={{ backgroundColor: "#3B4483" }}
           >
-            <div>
-              <Typography
-                fontSize={60}
-                fontFamily={"Bungee Spice "}
-                className="text-gray-100"
-              >
-                {userData.streak}*
-              </Typography>
+            <Typography
+              fontSize={15}
+              className="text-gray-300"
+              fontFamily={"Bungee Spice "}
+              textAlign="center"
+            >
+              Current Streak
+            </Typography>
+          </Box>
+          <Box
+            className="bg-gray-300 mt-3 p-1  min-w-[6rem] text-center min-h-[8.5rem] shadow-md rounded-lg"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            style={{ backgroundColor: "#3B4483" }}
 
-              <Typography
-                fontSize={20}
-                textAlign={"center"}
-                fontFamily={"Bungee Spice "}
-                className="text-gray-100"
-              >
-                Streak
-              </Typography>
-            </div>
+          >
+            {/* <Gauge updateColor={handleUpdateColor} value={percentage} /> */}
+            
+            <NumberCounter streak={userData.streak} />
           </Box>
         </Grid>
       </Grid>

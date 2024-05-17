@@ -24,7 +24,6 @@ export default function Leaderboard({ leaderboard }) {
         <tbody>
           {leaderboard.length > 0 &&
             leaderboard.map((user, index) => {
-              console.log(userData);
               return (
                 <>
                   {userData && userData._id === user._id ? (

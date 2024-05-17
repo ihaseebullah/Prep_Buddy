@@ -44,7 +44,7 @@ const MyComponent = () => {
           }}
           className=" rounded-md shadow-md my-2 py-3"
         >
-          <Chart />
+          <Chart results={allTimeResults} />
         </div>
         <br />
         <Typography className="py-2">Leaderboard</Typography>

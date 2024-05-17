@@ -3,7 +3,18 @@ import Sidebar from "../components/Sidebar";
 import PostAddRoundedIcon from "@mui/icons-material/PostAddRounded";
 import quiz from "../assets/img/quiz.png";
 import { Grid, Skeleton, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
+import axios from "axios";
 export default function Pill() {
+  //An effecient implementation is still necessary rather than this one !
+  const [lastTest, setLastTest] = useState({});
+  useEffect(() => {
+    axios.get("/analytics").then((res) => {
+      const lastIndex = res.data.Analytics.prevTestScores.length;
+      const lastTestData = res.data.Analytics.prevTestScores[lastIndex - 1];
+      setLastTest(lastTestData);
+    });
+  }, []);
   const styles = {
     background: "rgba(53, 83, 191, 0.6)",
     boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
@@ -31,7 +42,7 @@ export default function Pill() {
               style={{ backgroundColor: "#3B4483", fontFamily: "nunito" }}
               className="rounded-full text-white  h-[3.5rem] w-[3.5rem] flex justify-center items-center"
             >
-              40%
+              {(lastTest.correctPoints / lastTest.totalPoints) * 100}%
             </div>
           </div>
         </Grid>
@@ -40,7 +51,7 @@ export default function Pill() {
           <Stack>
             <div className="flex-col text-white justify-between">
               <p style={{ fontFamily: "nunito", textAlign: "center" }}>
-                100/120
+                {lastTest.correctPoints}/{lastTest.totalPoints}
               </p>
             </div>
             <div className="flex-col justify-last">
