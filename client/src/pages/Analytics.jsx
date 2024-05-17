@@ -11,9 +11,11 @@ import GuageAndStreak from "../components/GuageAndStreak";
 const MyComponent = () => {
   const [allTimeResults, setAllTimeResults] = useState([]);
   const [percentage, setPercentage] = useState(0);
+  const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
     axios.get("/analytics").then((res) => {
       setAllTimeResults(res.data.Analytics.prevTestScores);
+      setLeaderboard(res.data.Analytics.leaderBoard);
     });
   }, []);
 
@@ -47,7 +49,7 @@ const MyComponent = () => {
         <br />
         <Typography className="py-2">Leaderboard</Typography>
         <Divider />
-        <Leaderboard />
+        <Leaderboard leaderboard={leaderboard} />
       </Page>
     </Authenticator>
   );

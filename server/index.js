@@ -71,7 +71,9 @@ app.get('/analytics', async function (req, res) {
   try {
     // const results = await RESULT.find({ userID: userId }).sort({ _id: -1 }).limit(10);
     const user = await USER.findById(userId).populate('results').exec()
-    res.status(200).json({ Analytics: { prevTestScores: user.results } });
+    const leaderBoard = await USER.find({}, { fullName: 1, points: 1, _id: 1 }).limit(10).sort({ points: -1 })
+
+    res.status(200).json({ Analytics: { prevTestScores: user.results, leaderBoard: leaderBoard } });
   } catch (err) {
     res.status(500).json({ message: err.message })
   }

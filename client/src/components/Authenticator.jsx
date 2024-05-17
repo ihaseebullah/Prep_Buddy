@@ -10,10 +10,7 @@ export default function Authenticator({ children }) {
     useContext(AuthContext);
   const loginUser = async () => {
     try {
-      await axios.get("/").then((res) => {
-        setUserData(res.data.user);
-        setIsLoggedin(true);
-      });
+      const res = await axios.get("/");
     } catch (err) {
       if (err.response.status === 403 || 401) {
         setIsLoggedin(false);

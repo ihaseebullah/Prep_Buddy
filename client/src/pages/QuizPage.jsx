@@ -32,12 +32,12 @@ export default function QuizPage() {
           quiz={quizData}
           shuffle={true}
           allowPauseTimer={true}
-          // timer={
-          //   parseInt(quizData.optionsForm.time * 60) *
-          //   quizData.optionsForm.numberOfQuestions
-          // }
+          timer={
+            parseInt(quizData.optionsForm.time * 60) *
+            quizData.optionsForm.numberOfQuestions
+          }
           //Test Timer
-          timer={5}
+          // timer={5}
           onComplete={handleQuizResults}
         />
       ) : (
