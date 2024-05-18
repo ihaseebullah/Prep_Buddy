@@ -11,6 +11,9 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import Analytics from "../pages/Analytics";
 
+// quiz page import
+import QuizResult from "../components/QuizResult";
+
 export default function Router() {
   const { isLoggedIn, setIsLoggedin, userData, setUserData } =
     useContext(AuthContext);
@@ -45,6 +48,9 @@ export default function Router() {
           path="/selectedSubject/:subject"
           element={<SelectedSubjectWrapper />}
         />
+
+        {/* DUMMY QUIZ RESULT PAGE */}
+        <Route path="/result" element={<QuizResult />} />
       </Routes>
     </BrowserRouter>
   );
