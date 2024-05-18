@@ -11,18 +11,24 @@ import Authenticator from "../components/Authenticator";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { AuthContext } from "../Context/AuthContext";
+import { ResultContext } from "../Context/ResultsContext";
+import { useNavigate } from "react-router-dom";
+import QuizResult from "../components/QuizResult";
 export default function QuizPage() {
-  const [quizResults, setQuizResults] = useState({});
   const { quizData } = useContext(QuizContext);
   const { userData } = useContext(AuthContext);
+  const { quizResult, setQuizResult } = useContext(ResultContext);
+  const [showQuizResult, setShowQuizResults] = useState(false);
+  const NavigateTo = useNavigate();
   const headers = {
     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
   };
   const handleQuizResults = (quiz) => {
-    console.log(quiz);
     axios
       .post("/quiz/results", { ...quiz, userData }, { headers })
       .then(toast.success("Data sent"));
+    setQuizResult(<QuizResult data={quiz} />);
+    setShowQuizResults(true);
   };
 
   return (
@@ -32,6 +38,7 @@ export default function QuizPage() {
           quiz={quizData}
           shuffle={true}
           allowPauseTimer={true}
+          showDefaultResult={false}
           timer={
             parseInt(quizData.optionsForm.time * 60) *
             quizData.optionsForm.numberOfQuestions
@@ -43,6 +50,7 @@ export default function QuizPage() {
       ) : (
         <Loader />
       )}
+      {showQuizResult ? quizResult : false}
     </Authenticator>
   );
 }

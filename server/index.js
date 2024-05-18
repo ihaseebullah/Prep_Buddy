@@ -80,7 +80,9 @@ app.get('/analytics', async function (req, res) {
 })
 //Save quiz results
 app.post('/quiz/results', async function (req, res) {
+  console.log(req.session.USER)
   const userId = req.session.USER._id;
+  const username = req.session.USER.username;
   try {
     const { totalPoints, correctPoints, userInput } = req.body;
     const newResult = RESULT({
@@ -88,7 +90,7 @@ app.post('/quiz/results', async function (req, res) {
       correctPoints: parseInt(correctPoints),
       questionAttempted: userInput ? userInput.length : 0,
       userID: userId,
-      userName: req.session.USER.username
+      userName: username
     })
 
     await newResult.save().then(async (result) => {

@@ -5,6 +5,7 @@ import MainContextProvider from "./Context/Context";
 import Router from "./router/Router";
 import QuizContextProvider from "./Context/QuizContext";
 import AuthContextProvider from "./Context/AuthContext";
+import ResultsContextProvider from "./Context/ResultsContext";
 
 function App() {
   axios.defaults.baseURL = "http://localhost:3000";
@@ -13,7 +14,9 @@ function App() {
     <MainContextProvider>
       <AuthContextProvider>
         <QuizContextProvider>
-          <Router />
+          <ResultsContextProvider>
+            <Router />
+          </ResultsContextProvider>
         </QuizContextProvider>
       </AuthContextProvider>
     </MainContextProvider>

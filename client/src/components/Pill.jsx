@@ -42,7 +42,10 @@ export default function Pill() {
               style={{ backgroundColor: "#3B4483", fontFamily: "nunito" }}
               className="rounded-full text-white  h-[3.5rem] w-[3.5rem] flex justify-center items-center"
             >
-              {(lastTest.correctPoints / lastTest.totalPoints) * 100}%
+              {lastTest
+                ? (lastTest.correctPoints / lastTest.totalPoints) * 100
+                : "0"}
+              %
             </div>
           </div>
         </Grid>
@@ -51,12 +54,14 @@ export default function Pill() {
           <Stack>
             <div className="flex-col text-white justify-between">
               <p style={{ fontFamily: "nunito", textAlign: "center" }}>
-                {lastTest.correctPoints}/{lastTest.totalPoints}
+                {lastTest
+                  ? lastTest.correctPoints + "/" + lastTest.totalPoints
+                  : "00 / 00"}
               </p>
             </div>
             <div className="flex-col justify-last">
               <p style={{ fontFamily: "nunito" }} className="text-white mt-2">
-                Score in the Last test
+                {lastTest ? "Score in the Last test" : "No tests yet"}
               </p>
             </div>
           </Stack>

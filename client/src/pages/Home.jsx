@@ -7,6 +7,8 @@ import { Divider } from "@mui/material";
 import SubjectCarousaleWrapper from "../components/SubjectCarousale";
 import { CarouselTransition } from "../components/Qoutes";
 import Authenticator from "../components/Authenticator";
+import TestsCarousale from "../components/TestsCarousale";
+import Leaderboard from "../components/Leaderboard";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <Page>
         <Banner />
         <Pill />
+        <Divider />
+        <TestsCarousale />
         <Divider />
         <SubjectCarousaleWrapper />
         <Divider className="py-1" />
@@ -23,9 +27,17 @@ export default function Home() {
         >
           Great sayings:
         </h1>
-        <div style={{ paddingBottom: "10rem" }}>
+        <div style={{ paddingBottom: "3rem" }}>
           <CarouselTransition />
         </div>
+        <Divider />
+        <h1
+        style={{ fontFamily: "Roboto,Kanit", fontSize: "1rem" }}
+        className="pt-2"
+      >
+        Weekly Tests Leaderboard
+      </h1>
+        <Leaderboard leaderboard={[]} />
       </Page>
     </Authenticator>
   );

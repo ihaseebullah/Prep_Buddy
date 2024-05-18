@@ -5,33 +5,18 @@ import {
   FormControlLabel,
   Radio,
 } from "@mui/material";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import quizData from "../subComponents/data";
 import DoneIcon from "@mui/icons-material/Done";
+import Loader from "./Loader";
+import { ResultContext } from "../Context/ResultsContext";
 
-const QuizResult = () => {
-  const [data, setData] = useState(null); // Initialize with null
-
-  useEffect(() => {
-    setData(quizData); // Set data from imported quizData
-    console.log("useEffect executed");
-  }, []); // Empty dependency array ensures this runs once
-
-  useEffect(() => {
-    if (data) {
-      console.log("Data:", data); // Log data when it changes
-    }
-  }, [data]); // Add data to dependency array to log it when it changes
-
-  if (!data) {
-    return <Typography>Loading...</Typography>; // Loading state
-  }
-
+const QuizResult = ({ data }) => {
   const percentage = (data.correctPoints / data.totalPoints) * 100;
   const isPass = percentage >= 50;
 
   return (
-    <>
+    <React.Fragment>
       {/* Pass/Fail Box */}
       <Box
         backgroundColor={isPass ? "#e0f2f1" : "#ffebee"}
@@ -92,7 +77,7 @@ const QuizResult = () => {
               {/* Quiz Question */}
               <Box
                 display="flex"
-                width="100vw"
+                width="98vw"
                 alignItems="center"
                 justifyContent="space-evenly"
               >
@@ -105,12 +90,14 @@ const QuizResult = () => {
                 <Box
                   sx={{
                     backgroundColor: "#cfd8dc",
-                    width: "20%",
+                    width: "10%",
                     padding: "0.2rem",
+                    textAlign: "center",
                     borderRadius: 1,
+                    fontWeight: "bold",
                   }}
                 >
-                  {isCorrect ? "1/1 point" : "0/1 point"}
+                  {isCorrect ? "1/1 " : "0/1 "}
                 </Box>
               </Box>
 
@@ -131,28 +118,55 @@ const QuizResult = () => {
                   </Box>
                 ))}
               </RadioGroup>
-              <Typography
-                sx={{ color: isCorrect ? "green" : "red", marginLeft: "2rem" }}
-              >
-                {isCorrect
-                  ? question.messageForCorrectAnswer
-                  : question.messageForIncorrectAnswer}
-              </Typography>
-              {!isCorrect && (
+
+              {!isCorrect ? (
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    width: "100vw",
+                    width: "98vw",
                   }}
                 >
                   <Box
-                    backgroundColor="#cfd8dc"
-                    width="80%"
+                    backgroundColor="#ffebee"
+                    width="100%"
                     sx={{ borderRadius: 1, padding: "1rem 1rem" }}
                   >
+                    <Typography
+                      sx={{
+                        color: isCorrect ? "green" : "red",
+                        marginLeft: "2rem",
+                      }}
+                    >
+                      {question.messageForIncorrectAnswer}
+                    </Typography>
                     <Typography>Explanation : </Typography>
+                    <Typography>{question.explanation}</Typography>
+                  </Box>
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    width: "98vw",
+                  }}
+                >
+                  <Box
+                    backgroundColor="#e0f2f1"
+                    width="100%"
+                    sx={{ borderRadius: 1, padding: "1rem 1rem" }}
+                  >
+                    <Typography
+                      sx={{
+                        color: isCorrect ? "green" : "red",
+                        marginLeft: "2rem",
+                      }}
+                    >
+                      {question.messageForCorrectAnswer.substring(0,7)}
+                    </Typography>
                     <Typography>{question.explanation}</Typography>
                   </Box>
                 </Box>
@@ -161,7 +175,7 @@ const QuizResult = () => {
           );
         })}
       </Box>
-    </>
+    </React.Fragment>
   );
 };
 

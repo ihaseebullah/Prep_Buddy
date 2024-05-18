@@ -10,6 +10,7 @@ export default function Loader({ title }) {
     borderRadius: "1rem",
     padding: "1rem",
     marginBottom: "5rem",
+    border: "none",
   };
   return (
     <div className="flex justify-center items-center min-h-screen">
