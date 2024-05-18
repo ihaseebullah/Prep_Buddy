@@ -13,6 +13,7 @@ import Analytics from "../pages/Analytics";
 
 // quiz page import
 import QuizResult from "../components/QuizResult";
+import QuizData from "../components/QuizData";
 
 export default function Router() {
   const { isLoggedIn, setIsLoggedin, userData, setUserData } =
@@ -51,6 +52,7 @@ export default function Router() {
 
         {/* DUMMY QUIZ RESULT PAGE */}
         <Route path="/result" element={<QuizResult />} />
+        <Route path="/quizdata" element={<QuizData />} />
       </Routes>
     </BrowserRouter>
   );
