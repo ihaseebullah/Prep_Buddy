@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Radio,
   Grid,
+  Button,
 } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import quizData from "../subComponents/data";
@@ -16,10 +17,19 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { SaveQuizAs } from "./Modals";
 
-const QuizResult = ({ data }) => {
+import AiModal from "./AiModal";
+
+const QuizResult = () => {
+  const data = quizData;
   //Modal States
   const [open, setOpen] = React.useState(false);
   const [saved, setSaved] = useState(true);
+
+  // Ai Modal
+  const [aiOpen, setAiOpen] = useState(false);
+  const handleAiOpen = () => setAiOpen(true);
+  const handleAiClose = () => setAiOpen(false);
+  //
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //Component States
@@ -47,8 +57,27 @@ const QuizResult = ({ data }) => {
         }
       });
   };
+
+  const [initialPrompt, setInitialPrompt] = useState("");
+
+  const aiClickHandler = (data) => {
+    let answers = "";
+    data.answers.map((answer) => (answers += answer));
+
+    const question = data.question;
+    const answerIndex = parseInt(data.correctAnswer);
+    const answer = data.answers[answerIndex - 1];
+
+    const prompt = `Here is a question : ${question} , all the options were \n ${data.answers} and the correct option was :\n ${answer}, can you justify the answer ?`;
+    console.log(prompt);
+    setInitialPrompt(prompt);
+    handleAiOpen();
+  };
   return (
     <React.Fragment>
+      {aiOpen && (
+        <AiModal close={handleAiClose} initialPrompt={initialPrompt} />
+      )}
       {/* Modal For Saving quiz As */}
       <SaveQuizAs
         open={open}
@@ -215,6 +244,14 @@ const QuizResult = ({ data }) => {
                   </Box>
                 </Box>
               )}
+              <Box>
+                <Button
+                  variant="outlined"
+                  onClick={() => aiClickHandler(question)}
+                >
+                  Ask ai to explain
+                </Button>
+              </Box>
             </Box>
           );
         })}

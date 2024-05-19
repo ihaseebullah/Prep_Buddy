@@ -68,21 +68,27 @@ app.get("/", loginUser, async (req, res) => {
 //Generate new Quiz
 app.post("/getQuiz/", getQuiz);
 //Analytics
-app.get('/analytics', async function (req, res) {
+app.get("/analytics", async function (req, res) {
   const userId = req.session.USER._id;
   try {
     // const results = await RESULT.find({ userID: userId }).sort({ _id: -1 }).limit(10);
-    const user = await USER.findById(userId).populate('results').exec()
-    const leaderBoard = await USER.find({}, { fullName: 1, points: 1, _id: 1 }).limit(10).sort({ points: -1 })
+    const user = await USER.findById(userId).populate("results").exec();
+    const leaderBoard = await USER.find({}, { fullName: 1, points: 1, _id: 1 })
+      .limit(10)
+      .sort({ points: -1 });
 
-    res.status(200).json({ Analytics: { prevTestScores: user.results, leaderBoard: leaderBoard } });
+    res
+      .status(200)
+      .json({
+        Analytics: { prevTestScores: user.results, leaderBoard: leaderBoard },
+      });
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(500).json({ message: err.message });
   }
-})
+});
 //Save quiz results
-app.post('/quiz/results', async function (req, res) {
-  console.log(req.session.USER)
+app.post("/quiz/results", async function (req, res) {
+  console.log(req.session.USER);
   const userId = req.session.USER._id;
   const username = req.session.USER.username;
   try {
@@ -92,45 +98,55 @@ app.post('/quiz/results', async function (req, res) {
       correctPoints: parseInt(correctPoints),
       questionAttempted: userInput ? userInput.length : 0,
       userID: userId,
-      userName: username
-    })
+      userName: username,
+    });
 
     await newResult.save().then(async (result) => {
       const currentUser = await USER.findById(userId);
       await USER.findByIdAndUpdate(userId, {
         points: currentUser.points + parseInt(correctPoints),
-        results: currentUser.results ? [...currentUser.results, result._id] : [result._id]
+        results: currentUser.results
+          ? [...currentUser.results, result._id]
+          : [result._id],
       });
       loginUser();
-      res.status(200).json({ success: true, message: "Results saved successfully" })
-    })
+      res
+        .status(200)
+        .json({ success: true, message: "Results saved successfully" });
+    });
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(500).json({ message: err.message });
   }
-})
+});
 
-//Save Quiz Results to favouirte 
-app.post('/quiz/results/saveFavourite', loginUser, async (req, res) => {
-  const { quizTitleToSave, description, priority, quiz } = req.body
+//Save Quiz Results to favouirte
+app.post("/quiz/results/saveFavourite", loginUser, async (req, res) => {
+  const { quizTitleToSave, description, priority, quiz } = req.body;
   const newSave = SAVED({
     quizTitle: quizTitleToSave,
     userId: req.session.USER._id,
     description: description,
     priority: priority,
-    quiz: quiz
-  })
+    quiz: quiz,
+  });
   await newSave.save().then(async (saved) => {
-    const user = await USER.findById(req.session.USER._id)
-    await USER.findByIdAndUpdate(req.session.USER._id, { saved: [...user.saved, saved._id] })
-    res.status(200).json({ message: req.session.USER.fullName + " Your quiz has been saved" })
-  })
-})
-app.get('/test', async (req, res) => {
-  const result = await USER.find({})
+    const user = await USER.findById(req.session.USER._id);
+    await USER.findByIdAndUpdate(req.session.USER._id, {
+      saved: [...user.saved, saved._id],
+    });
+    res
+      .status(200)
+      .json({
+        message: req.session.USER.fullName + " Your quiz has been saved",
+      });
+  });
+});
+app.get("/test", async (req, res) => {
+  const result = await USER.find({});
   // await USER.findByIdAndDelete("6644ef1694724918bcaca08d")
   // const result=await RESULT.findById("6645f450ef1e9041ae041d4a")
-  res.status(200).json(result)
-})
+  res.status(200).json(result);
+});
 // ai integration
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
@@ -162,7 +178,6 @@ app.post("/ai", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 app.post("/api/signup/", Signup);
 app.post("/api/auth/login", Login);
