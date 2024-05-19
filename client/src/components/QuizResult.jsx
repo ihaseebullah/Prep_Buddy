@@ -19,7 +19,7 @@ import { SaveQuizAs } from "./Modals";
 const QuizResult = ({ data }) => {
   //Modal States
   const [open, setOpen] = React.useState(false);
-  const [saved, setSaved] = useState(true);
+  const [saved, setSaved] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //Component States

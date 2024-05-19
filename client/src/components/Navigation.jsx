@@ -15,7 +15,7 @@ export default function Navigation() {
     border: "1px solid rgba(255, 255, 255, 0.18)",
   };
 
-  const { bottomBar, setbottomBar, value, setValue } =
+  const { bottomBar, setbottomBar, value, setValue, saved, setSaved } =
     React.useContext(MainContext);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -47,7 +47,7 @@ export default function Navigation() {
         }
       />
       <BottomNavigationAction
-        onClick={() => navigateTo("/")}
+        onClick={() => setSaved(true)}
         label={
           <Typography variant="body2" style={{ color: "#E1E1E1" }}>
             Liked
@@ -56,10 +56,12 @@ export default function Navigation() {
         value="Liked"
         icon={
           <i
-            className={`fa-${value === "Liked" ? "solid" : "regular"} fa-heart`}
+            className={`fa-${
+              value === "bookmark" ? "solid" : "regular"
+            } fa-bookmark`}
             style={{
               fontSize: "1.5rem",
-              color: `${value === "Liked" ? "#E1E1E1" : "#E1E1E1"}`,
+              color: `${value === "bookmark" ? "#E1E1E1" : "#E1E1E1"}`,
             }}
           ></i>
         }

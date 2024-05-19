@@ -6,7 +6,7 @@ const saved = new mongoose.Schema({
     description: String,
     priority: Boolean,
     quiz: Object
-})
+}, { timestamps: true })
 
 const SAVED = mongoose.model('Saved', saved)
 
