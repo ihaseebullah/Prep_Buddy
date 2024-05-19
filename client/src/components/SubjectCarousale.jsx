@@ -50,7 +50,6 @@ function SubjectCarousale() {
         gap: 1,
         py: 1,
         overflow: "auto",
-        width: 343,
         scrollSnapType: "x mandatory",
         "& > *": {
           scrollSnapAlign: "center",

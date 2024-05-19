@@ -4,14 +4,17 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
+  Grid,
 } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
 import quizData from "../subComponents/data";
 import DoneIcon from "@mui/icons-material/Done";
 import Loader from "./Loader";
 import { ResultContext } from "../Context/ResultsContext";
+import { useNavigate } from "react-router-dom";
 
 const QuizResult = ({ data }) => {
+  const NavigateTo = useNavigate();
   const percentage = (data.correctPoints / data.totalPoints) * 100;
   const isPass = percentage >= 50;
 
@@ -40,10 +43,16 @@ const QuizResult = ({ data }) => {
           {isPass ? (
             <>
               <DoneIcon color="success" sx={{ marginRight: "0.3rem" }} />
-              <Typography variant="h5">Congratulations! You passed!</Typography>
+              <Typography variant="h5">
+                Congratulations! You Out Performed Sire!
+              </Typography>
             </>
           ) : (
-            <Typography variant="h5">Sorry, you didn't pass.</Typography>
+            <Box>
+              <Typography textAlign={"center"} variant="h5">
+                You'll cover it soon.
+              </Typography>
+            </Box>
           )}
         </Box>
         <Box display="flex" alignItems="center">
@@ -55,8 +64,10 @@ const QuizResult = ({ data }) => {
             {percentage}%
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center">
-          <Typography variant="subtitle1">To pass: 50% or higher</Typography>
+        <Box>
+          <Typography textAlign={"center"} variant="subtitle1">
+            To pass: 50% or higher
+          </Typography>
         </Box>
       </Box>
 
@@ -136,13 +147,11 @@ const QuizResult = ({ data }) => {
                     <Typography
                       sx={{
                         color: isCorrect ? "green" : "red",
-                        marginLeft: "2rem",
                       }}
                     >
-                      {question.messageForIncorrectAnswer}
+                      {question.messageForIncorrectAnswer.substring(0, 9)} :{" "}
+                      {question.explanation}
                     </Typography>
-                    <Typography>Explanation : </Typography>
-                    <Typography>{question.explanation}</Typography>
                   </Box>
                 </Box>
               ) : (
@@ -162,18 +171,34 @@ const QuizResult = ({ data }) => {
                     <Typography
                       sx={{
                         color: isCorrect ? "green" : "red",
-                        marginLeft: "2rem",
                       }}
                     >
-                      {question.messageForCorrectAnswer.substring(0,7)}
+                      {question.messageForCorrectAnswer.substring(0, 7)}:{" "}
+                      {question.explanation}
                     </Typography>
-                    <Typography>{question.explanation}</Typography>
                   </Box>
                 </Box>
               )}
             </Box>
           );
         })}
+        <Box>
+          <Grid container>
+            <Grid item xs={6}>
+              <button
+                onClick={() => NavigateTo("/")}
+                className="bg-blue-800 p-3 rounded-lg text-white font-bold w-[8rem]"
+              >
+                Exit Room
+              </button>
+            </Grid>
+            <Grid item xs={6} display="flex" justifyContent="end">
+              <button className="bg-blue-800 p-3 rounded-lg text-white font-bold w-[8rem]">
+                Save Quiz
+              </button>
+            </Grid>
+          </Grid>
+        </Box>
       </Box>
     </React.Fragment>
   );
