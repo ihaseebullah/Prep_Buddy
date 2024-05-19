@@ -10,6 +10,7 @@ const user_schema = new mongoose.Schema({
     userID: String,
     userName: String,
     results: [{ type: mongoose.Schema.ObjectId, ref: 'Result' }],
+    saved: [{ type: mongoose.Schema.ObjectId, ref: 'Saved' }],
     subscription: { type: Boolean, default: false },
     lastSubscriptionDate: Date,
     points: { type: Number, default: 0 },

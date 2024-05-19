@@ -12,14 +12,50 @@ import DoneIcon from "@mui/icons-material/Done";
 import Loader from "./Loader";
 import { ResultContext } from "../Context/ResultsContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { SaveQuizAs } from "./Modals";
 
 const QuizResult = ({ data }) => {
+  //Modal States
+  const [open, setOpen] = React.useState(false);
+  const [saved, setSaved] = useState(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  //Component States
   const NavigateTo = useNavigate();
   const percentage = (data.correctPoints / data.totalPoints) * 100;
   const isPass = percentage >= 50;
-
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+  };
+  const saveResult = async (saveDetails) => {
+    // console.log({ ...data, ...saveDetails });
+    await axios
+      .post(
+        "/quiz/results/saveFavourite",
+        { ...saveDetails, quiz: data },
+        { headers }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setSaved(true);
+          handleClose();
+          toast.success(res.data.message);
+        } else {
+          toast.error("Something went wrong!");
+        }
+      });
+  };
   return (
     <React.Fragment>
+      {/* Modal For Saving quiz As */}
+      <SaveQuizAs
+        open={open}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+        saveResult={saveResult}
+      />
       {/* Pass/Fail Box */}
       <Box
         backgroundColor={isPass ? "#e0f2f1" : "#ffebee"}
@@ -193,8 +229,14 @@ const QuizResult = ({ data }) => {
               </button>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
-              <button className="bg-blue-800 p-3 rounded-lg text-white font-bold w-[8rem]">
-                Save Quiz
+              <button
+                onClick={handleOpen}
+                disabled={saved ? true : false}
+                className={` p-3 rounded-lg ${
+                  saved ? "text-gray-300 bg-blue-600" : "text-white bg-blue-800"
+                }  font-bold w-[8rem]`}
+              >
+                {saved ? "Saved" : "Save Quiz"}
               </button>
             </Grid>
           </Grid>

@@ -13,6 +13,7 @@ const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { RESULT } = require("./Database/Results");
 const { USER } = require("./Database/User");
+const { SAVED } = require("./Database/Saved");
 //Initialization
 const app = express();
 app.use(cookieParser());
@@ -37,7 +38,7 @@ const database_Connection = connectToDb;
 //connection to database server
 database_Connection();
 function loginUser(req, res, next) {
-  if (!req.session.user) {
+  if (!req.session.USER) {
     const token = req.cookies?.jwt;
     if (token) {
       try {
@@ -54,6 +55,7 @@ function loginUser(req, res, next) {
       res.status(403).json({ message: "Please Login First" });
     }
   }
+  next();
 }
 //Adding new Questions in bulk
 app.get("/loadNewData/:subject", loadBulkData);
@@ -107,6 +109,22 @@ app.post('/quiz/results', async function (req, res) {
   }
 })
 
+//Save Quiz Results to favouirte 
+app.post('/quiz/results/saveFavourite', loginUser, async (req, res) => {
+  const { quizTitleToSave, description, priority, quiz } = req.body
+  const newSave = SAVED({
+    quizTitle: quizTitleToSave,
+    userId: req.session.USER._id,
+    description: description,
+    priority: priority,
+    quiz: quiz
+  })
+  await newSave.save().then(async (saved) => {
+    const user = await USER.findById(req.session.USER._id)
+    await USER.findByIdAndUpdate(req.session.USER._id, { saved: [...user.saved, saved._id] })
+    res.status(200).json({ message: req.session.USER.fullName + " Your quiz has been saved" })
+  })
+})
 app.get('/test', async (req, res) => {
   const result = await USER.find({})
   // await USER.findByIdAndDelete("6644ef1694724918bcaca08d")
