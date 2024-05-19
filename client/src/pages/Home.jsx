@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Page from "../components/Page";
 
 import Banner from "../components/Banner";
@@ -9,8 +9,15 @@ import { CarouselTransition } from "../components/Qoutes";
 import Authenticator from "../components/Authenticator";
 import TestsCarousale from "../components/TestsCarousale";
 import Leaderboard from "../components/Leaderboard";
+import axios from "axios";
 
 export default function Home() {
+  const [savedData, setSavedData] = useState([]);
+  useEffect(() => {
+    axios.get("/analytics").then((res) => {
+      setSavedData(res.data.Analytics?.saved);
+    });
+  }, []);
   return (
     <Authenticator>
       <Page>
@@ -32,11 +39,11 @@ export default function Home() {
         </div>
         <Divider />
         <h1
-        style={{ fontFamily: "Roboto,Kanit", fontSize: "1rem" }}
-        className="pt-2"
-      >
-        Weekly Tests Leaderboard
-      </h1>
+          style={{ fontFamily: "Roboto,Kanit", fontSize: "1rem" }}
+          className="pt-2"
+        >
+          Weekly Tests Leaderboard
+        </h1>
         <Leaderboard leaderboard={[]} />
       </Page>
     </Authenticator>

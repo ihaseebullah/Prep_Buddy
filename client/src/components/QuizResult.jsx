@@ -23,7 +23,7 @@ const QuizResult = () => {
   const data = quizData;
   //Modal States
   const [open, setOpen] = React.useState(false);
-  const [saved, setSaved] = useState(true);
+  const [saved, setSaved] = useState(false);
 
   // Ai Modal
   const [aiOpen, setAiOpen] = useState(false);
@@ -32,6 +32,7 @@ const QuizResult = () => {
   //
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   //Component States
   const NavigateTo = useNavigate();
   const percentage = (data.correctPoints / data.totalPoints) * 100;
