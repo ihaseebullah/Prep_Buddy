@@ -19,8 +19,7 @@ import { SaveQuizAs } from "./Modals";
 
 import AiModal from "./AiModal";
 
-const QuizResult = () => {
-  const data = quizData;
+const QuizResult = ({ data }) => {
   //Modal States
   const [open, setOpen] = React.useState(false);
   const [saved, setSaved] = useState(false);
@@ -140,7 +139,7 @@ const QuizResult = () => {
           const userAnswerIndex = data.userInput[index];
           const isCorrect =
             userAnswerIndex === parseInt(question.correctAnswer);
-
+          console.log(isCorrect);
           return (
             <Box
               key={index}

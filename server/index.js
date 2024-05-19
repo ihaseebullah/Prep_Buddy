@@ -62,7 +62,11 @@ app.get("/loadNewData/:subject", loadBulkData);
 
 //Routes
 app.get("/", loginUser, async (req, res) => {
-  res.status(200).json({ user: await USER.findById(req.session.USER._id) });
+  if (req.session.USER) {
+
+    const user = await USER.findById(req.session.USER._id);
+    res.status(200).json({ user: user });
+  }
 });
 
 //Generate new Quiz
@@ -144,6 +148,12 @@ app.post("/quiz/results/saveFavourite", loginUser, async (req, res) => {
     });
   });
 });
+
+app.get('/quiz/saved/:id', async function (req, res) {
+  console.log(req.params.id)
+  const savedResult = await SAVED.findById(req.params.id)
+  res.status(200).json({ savedQuiz: savedResult });
+})
 app.get("/test", async (req, res) => {
   const result = await USER.find({});
   // await USER.findByIdAndDelete("6644ef1694724918bcaca08d")

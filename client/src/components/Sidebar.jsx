@@ -15,10 +15,12 @@ import bell from "../assets/img/bell.gif";
 import avatar from "../assets/icons/avatar-svgrepo-com.svg";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
   const { userData } = React.useContext(AuthContext);
   const { sideBarState: state, setSideBarState: setState } =
     React.useContext(MainContext);
+
   const toggleDrawer = () => {
     setState(!state);
   };
@@ -113,7 +115,8 @@ export function NotificationsDrawer() {
           className="text-center"
           style={{ fontFamily: "Roboto", fontSize: "1.3rem" }}
         >
-          <i class="fa-solid fa-bell" />&nbsp;Notifications
+          <i class="fa-solid fa-bell" />
+          &nbsp;Notifications
         </h3>
       </div>
       <List>
@@ -175,6 +178,7 @@ export function NotificationsDrawer() {
 
 export function Saved() {
   const [savedData, setSavedData] = React.useState([]);
+  const NavigateTo = useNavigate();
   React.useEffect(() => {
     axios.get("/analytics").then((res) => {
       setSavedData(res.data.Analytics?.saved);
@@ -252,6 +256,9 @@ export function Saved() {
                     </Grid>
                     <Grid style={{ textAlign: "right" }} item xs={4}>
                       <button
+                        onClick={() => {
+                          NavigateTo(`/saved/results/${item._id}`);
+                        }}
                         className="rounded-lg text-gray-700"
                         style={containerStyle}
                       >

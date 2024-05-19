@@ -10,10 +10,9 @@ import { Toaster } from "react-hot-toast";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import Analytics from "../pages/Analytics";
+import SavedQuiz from "../components/SavedQuiz";
 
 // quiz page import
-import QuizResult from "../components/QuizResult";
-import QuizData from "../components/QuizData";
 
 export default function Router() {
   const { isLoggedIn, setIsLoggedin, userData, setUserData } =
@@ -21,6 +20,10 @@ export default function Router() {
   const SelectedSubjectWrapper = () => {
     const { subject } = useParams();
     return <SelectedSubject subject={subject} />;
+  };
+  const SavedQuizResultWrapper = () => {
+    const { id } = useParams();
+    return <SavedQuiz quizId={id} />;
   };
   return (
     <BrowserRouter>
@@ -37,6 +40,12 @@ export default function Router() {
           path="/Analytics"
           element={isLoggedIn === true ? <Analytics /> : <Login />}
         />
+        <Route path="/saved/results/:id" element={<SavedQuizResultWrapper />} />
+        <Route
+          path="/selectedSubject/:subject"
+          element={<SelectedSubjectWrapper />}
+        />
+
         <Route
           path="/*"
           element={
@@ -45,14 +54,7 @@ export default function Router() {
             </Page>
           }
         />
-        <Route
-          path="/selectedSubject/:subject"
-          element={<SelectedSubjectWrapper />}
-        />
-
         {/* DUMMY QUIZ RESULT PAGE */}
-        <Route path="/result" element={<QuizResult />} />
-        <Route path="/quizdata" element={<QuizData />} />
       </Routes>
     </BrowserRouter>
   );
