@@ -62,14 +62,11 @@ const QuizResult = () => {
   const [initialPrompt, setInitialPrompt] = useState("");
 
   const aiClickHandler = (data) => {
-    let answers = "";
-    data.answers.map((answer) => (answers += answer));
-
     const question = data.question;
     const answerIndex = parseInt(data.correctAnswer);
     const answer = data.answers[answerIndex - 1];
 
-    const prompt = `Here is a question : ${question} , all the options were \n ${data.answers} and the correct option was :\n ${answer}, can you justify the answer ?`;
+    const prompt = `Here is a question : ${question} , all the options were \n ${data.answers} and the correct option was :\n ${answer}, can you justify the answer and why the other options were incorrect?`;
     console.log(prompt);
     setInitialPrompt(prompt);
     handleAiOpen();

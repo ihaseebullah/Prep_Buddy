@@ -72,24 +72,21 @@ app.get("/analytics", async function (req, res) {
   const userId = req.session.USER._id;
   try {
     // const results = await RESULT.find({ userID: userId }).sort({ _id: -1 }).limit(10);
-<<<<<<< HEAD
     const user = await USER.findById(userId).populate("results").exec();
     const leaderBoard = await USER.find({}, { fullName: 1, points: 1, _id: 1 })
       .limit(10)
       .sort({ points: -1 });
-
+    const saved = await USER.findById(userId).populate("saved").exec();
+    console.log(saved);
     res
       .status(200)
       .json({
-        Analytics: { prevTestScores: user.results, leaderBoard: leaderBoard },
+        Analytics: {
+          prevTestScores: user.results,
+          leaderBoard: leaderBoard,
+          saved: saved.saved,
+        },
       });
-=======
-    const user = await USER.findById(userId).populate('results').exec()
-    const leaderBoard = await USER.find({}, { fullName: 1, points: 1, _id: 1 }).limit(10).sort({ points: -1 })
-    const saved = await USER.findById(userId).populate('saved').exec()
-    console.log(saved)
-    res.status(200).json({ Analytics: { prevTestScores: user.results, leaderBoard: leaderBoard, saved: saved.saved } });
->>>>>>> 9ac5ed5f82dad32423d779f7222cd1dd0d94d1fc
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -142,11 +139,9 @@ app.post("/quiz/results/saveFavourite", loginUser, async (req, res) => {
     await USER.findByIdAndUpdate(req.session.USER._id, {
       saved: [...user.saved, saved._id],
     });
-    res
-      .status(200)
-      .json({
-        message: req.session.USER.fullName + " Your quiz has been saved",
-      });
+    res.status(200).json({
+      message: req.session.USER.fullName + " Your quiz has been saved",
+    });
   });
 });
 app.get("/test", async (req, res) => {
