@@ -191,7 +191,6 @@ const QuizResult = ({ data }) => {
                   </Box>
                 ))}
               </RadioGroup>
-
               {!isCorrect ? (
                 <Box
                   sx={{
@@ -241,12 +240,13 @@ const QuizResult = ({ data }) => {
                   </Box>
                 </Box>
               )}
-              <Box>
+              <Box className="flex justify-end">
                 <Button
+                  style={{ borderRadius: "24px", margin: "1rem" }}
                   variant="outlined"
                   onClick={() => aiClickHandler(question)}
                 >
-                  Ask ai to explain
+                  Ask ai
                 </Button>
               </Box>
             </Box>

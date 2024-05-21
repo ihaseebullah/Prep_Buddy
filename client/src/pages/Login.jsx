@@ -7,6 +7,7 @@ import { AuthContext } from "../Context/AuthContext";
 import Loader from "../components/Loader";
 import { useState } from "react";
 export default function Login() {
+  const NavigateTo = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loadingRequest, setLoadingRequest] = useState(false);
@@ -126,7 +127,7 @@ export default function Login() {
                   id="grid-first-name"
                   onChange={(e) => setUsername(e.target.value)}
                   type="text"
-                  placeholder="Jane"
+                  placeholder="Your username"
                 />
               </div>
               <div className="w-full md:w-1/2 px-3">
@@ -144,8 +145,9 @@ export default function Login() {
                   placeholder="******************"
                 />
                 <p className="text-gray-600 text-xs italic">
-                  Forgot your password, Don't worry we've gotchu{" "}
+                  Click here to create account &nbsp;
                   <button
+                    onClick={() => NavigateTo("/Signup")}
                     className="text-blue-600"
                     style={{ textDecoration: "underline" }}
                   >

@@ -8,7 +8,7 @@ export default function NumberCounter({streak}) {
       <Typography
         fontSize={60}
         className="text-gray-300"
-        fontFamily={"Bungee Spice "}
+        fontFamily={"Poetsen "}
         textAlign="center"
       >
         <AnimatedNumbers

@@ -24,95 +24,97 @@ export default function Navigation() {
   const navigateTo = useNavigate();
   return (
     <React.Fragment>
-      <Saved />
-      <NotificationsDrawer />
-      <BottomNavigation
-        value={value}
-        style={styles}
-        className="bottom-navigation shadow-lg opacity-[.95]   rounded-[5rem]"
-        onChange={handleChange}
-      >
-        <BottomNavigationAction
-          onClick={() => navigateTo("/")}
-          label={
-            <Typography variant="body2" style={{ color: "#E1E1E1" }}>
-              Recents
-            </Typography>
-          }
-          value="Home"
-          icon={
-            <i
-              className="fa-solid fa-house"
-              style={{
-                fontSize: "1.5rem",
-                color: `${value === "Home" ? "#E1E1E1" : "#E1E1E1"}`,
-              }}
-            ></i>
-          }
-        />
-        <BottomNavigationAction
-          onClick={() => setSaved(true)}
-          label={
-            <Typography variant="body2" style={{ color: "#E1E1E1" }}>
-              Liked
-            </Typography>
-          }
-          value="Liked"
-          icon={
-            <i
-              className={`fa-${
-                value === "bookmark" ? "solid" : "regular"
-              } fa-bookmark`}
-              style={{
-                fontSize: "1.5rem",
-                color: `${value === "bookmark" ? "#E1E1E1" : "#E1E1E1"}`,
-              }}
-            ></i>
-          }
-        />
-        <BottomNavigationAction
-          label={
-            <Typography variant="body2" style={{ color: "#E1E1E1" }}>
-              Notifications
-            </Typography>
-          }
-          onClick={() => setbottomBar(true)}
-          value="Notifications"
-          icon={
-            <i
-              className={`fa-regular fa-bell`}
-              style={{
-                fontSize: "1.5rem",
-                color: `${value === "Notifications" ? "#E1E1E1" : "#E1E1E1"}`,
-              }}
-            ></i>
-          }
-        />
-        <BottomNavigationAction
-          onClick={() => navigateTo("/Analytics")}
-          label={
-            <Typography variant="body2" style={{ color: "#E1E1E1" }}>
-              Analytics
-            </Typography>
-          }
-          value="Analytics"
-          sx={{
-            "&.Mui-selected": {
-              // styles for the selected item
-              color: "#E1E1E1", // change to your desired color
-            },
-          }}
-          icon={
-            <i
-              className="fa-solid fa-chart-simple"
-              style={{
-                fontSize: "1.5rem",
-                color: `${value === "Analytics" ? "#E1E1E1" : "#E1E1E1"}`,
-              }}
-            ></i>
-          }
-        />
-      </BottomNavigation>
+      <div className="flex justify-center">
+        <Saved />
+        <NotificationsDrawer />
+        <BottomNavigation
+          value={value}
+          style={styles}
+          className="bottom-navigation shadow-lg opacity-[.95]   rounded-[5rem]"
+          onChange={handleChange}
+        >
+          <BottomNavigationAction
+            onClick={() => navigateTo("/")}
+            label={
+              <Typography variant="body2" style={{ color: "#E1E1E1" }}>
+                Recents
+              </Typography>
+            }
+            value="Home"
+            icon={
+              <i
+                className="fa-solid fa-house"
+                style={{
+                  fontSize: "1.5rem",
+                  color: `${value === "Home" ? "#E1E1E1" : "#E1E1E1"}`,
+                }}
+              ></i>
+            }
+          />
+          <BottomNavigationAction
+            onClick={() => setSaved(true)}
+            label={
+              <Typography variant="body2" style={{ color: "#E1E1E1" }}>
+                Liked
+              </Typography>
+            }
+            value="Liked"
+            icon={
+              <i
+                className={`fa-${
+                  value === "bookmark" ? "solid" : "regular"
+                } fa-bookmark`}
+                style={{
+                  fontSize: "1.5rem",
+                  color: `${value === "bookmark" ? "#E1E1E1" : "#E1E1E1"}`,
+                }}
+              ></i>
+            }
+          />
+          <BottomNavigationAction
+            label={
+              <Typography variant="body2" style={{ color: "#E1E1E1" }}>
+                Notifications
+              </Typography>
+            }
+            onClick={() => setbottomBar(true)}
+            value="Notifications"
+            icon={
+              <i
+                className={`fa-regular fa-bell`}
+                style={{
+                  fontSize: "1.5rem",
+                  color: `${value === "Notifications" ? "#E1E1E1" : "#E1E1E1"}`,
+                }}
+              ></i>
+            }
+          />
+          <BottomNavigationAction
+            onClick={() => navigateTo("/Analytics")}
+            label={
+              <Typography variant="body2" style={{ color: "#E1E1E1" }}>
+                Analytics
+              </Typography>
+            }
+            value="Analytics"
+            sx={{
+              "&.Mui-selected": {
+                // styles for the selected item
+                color: "#E1E1E1", // change to your desired color
+              },
+            }}
+            icon={
+              <i
+                className="fa-solid fa-chart-simple"
+                style={{
+                  fontSize: "1.5rem",
+                  color: `${value === "Analytics" ? "#E1E1E1" : "#E1E1E1"}`,
+                }}
+              ></i>
+            }
+          />
+        </BottomNavigation>
+      </div>
     </React.Fragment>
   );
 }

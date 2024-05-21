@@ -70,7 +70,7 @@ app.get("/", loginUser, async (req, res) => {
 });
 
 //Generate new Quiz
-app.post("/getQuiz/", getQuiz);
+app.post("/getQuiz/:subject", getQuiz);
 //Analytics
 app.get("/analytics", async function (req, res) {
   const userId = req.session.USER._id;
@@ -154,6 +154,12 @@ app.get('/quiz/saved/:id', async function (req, res) {
   const savedResult = await SAVED.findById(req.params.id)
   res.status(200).json({ savedQuiz: savedResult });
 })
+app.get('/logout', async function (req, res) {
+  res.clearCookie('jwt', { path: '/' });
+  req.session.destroy();
+  res.status(200).json({ message: "Logged out successfully" });
+});
+
 app.get("/test", async (req, res) => {
   const result = await USER.find({});
   // await USER.findByIdAndDelete("6644ef1694724918bcaca08d")

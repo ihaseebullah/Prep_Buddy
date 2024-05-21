@@ -8,6 +8,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
+import LogoutIcon from "@mui/icons-material/Logout";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import SettingsIcon from "@mui/icons-material/Settings";
 import MailIcon from "@mui/icons-material/Mail";
 import { MainContext } from "../Context/Context";
 import { Avatar, Grid, Skeleton, Stack, Typography } from "@mui/material";
@@ -17,9 +21,28 @@ import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 export default function Sidebar() {
-  const { userData } = React.useContext(AuthContext);
+  const NavigateTo = useNavigate();
+  const { userData, setUserData, isLoggedIn, setIsLoggedin } =
+    React.useContext(AuthContext);
   const { sideBarState: state, setSideBarState: setState } =
     React.useContext(MainContext);
+  const logout = () => {
+    axios
+      .get("/logout")
+      .then((res) => {
+        if (res.status === 200) {
+          setIsLoggedin(false);
+          setUserData({});
+          NavigateTo("/login");
+          
+        } else {
+          console.error("Failed to logout:", res.data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to logout:", error.message);
+      });
+  };
 
   const toggleDrawer = () => {
     setState(!state);
@@ -35,8 +58,8 @@ export default function Sidebar() {
       <div className="flex p-2 justify-center">
         <Stack spacing={1}>
           <Avatar
-            className="shadow-lg "
-            style={{ height: "5rem", width: "5rem" }}
+            className="shadow-lg"
+            style={{ height: "5rem",marginTop:"3rem", width: "5rem" }}
           />
           <h3 className="text-center">
             {" "}
@@ -47,14 +70,68 @@ export default function Sidebar() {
         </Stack>
       </div>
       <Divider />
+
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
+        <ListItem disablePadding>
+          <ListItemButton onClick={()=>NavigateTo('/analytics')}>
+            <ListItemIcon>
+              <LeaderboardIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Leaderboard"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <PeopleAltIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Friends"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Settings"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText onClick={logout} primary={"Logout"} />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        <Typography style={{ marginLeft: "1rem", paddingTop: "0.5rem" }}>
+          Archived
+        </Typography>
+        {[
+          {
+            title: "National MDCAT",
+            description: "3.98M MCQS",
+          },
+          {
+            title: "ETEA Past papers (Medical)",
+            description: "3.98M MCQS",
+          },
+          {
+            title: "ETEA Past papers (Engineering)",
+            description: "3.98M MCQS",
+          },
+          {
+            title: "PMC Past papers (Medical)",
+            description: "3.98M MCQS",
+          },
+        ].map((text, index) => (
+          <ListItem key={text.title} disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text.title} />
             </ListItemButton>
           </ListItem>
         ))}

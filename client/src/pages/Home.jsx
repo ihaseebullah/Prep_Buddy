@@ -12,12 +12,7 @@ import Leaderboard from "../components/Leaderboard";
 import axios from "axios";
 
 export default function Home() {
-  const [savedData, setSavedData] = useState([]);
-  useEffect(() => {
-    axios.get("/analytics").then((res) => {
-      setSavedData(res.data.Analytics?.saved);
-    });
-  }, []);
+
   return (
     <Authenticator>
       <Page>

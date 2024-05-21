@@ -46,7 +46,11 @@ export default function OptionsPage({ subject }) {
   const handleSubmit = () => {
     setLoading(true);
     axios
-      .post("/getQuiz/", { ...optionsForm, subject: subject }, { headers })
+      .post(
+        `/getQuiz/${subject}`,
+        { ...optionsForm, subject: subject },
+        { headers }
+      )
       .then(async (res) => {
         console.log(res.data);
 

@@ -20,6 +20,7 @@ import { MainContext } from "../Context/Context";
 import MessageCard from "../subComponents/MessageCard";
 import CloseIcon from "@mui/icons-material/Close";
 import background from "../assets/img/background.jpg";
+import AiModal from "./AiModal";
 
 export default function IconButtons(props) {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -105,7 +106,7 @@ export default function IconButtons(props) {
         >
           <Paper
             sx={{
-              height: "100vh",
+              height: "90vh",
               width: "100vw",
               background: "rgba(248, 255, 253, 0.14)",
               boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
@@ -143,7 +144,7 @@ export default function IconButtons(props) {
                 </IconButton>
               </Box>
               <Divider />
-              <List sx={{ height: "75vh" }}>
+              <List sx={{ height: "70vh" }}>
                 {chat.map((singleChat, i) => (
                   <ListItem
                     sx={{

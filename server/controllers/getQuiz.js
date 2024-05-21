@@ -9,20 +9,20 @@ async function getQuiz(req, res) {
             ])
             res.json({ quizContent: randomQuiz })
         } else if (subject === "Physics") {
-            const randomQuiz = Physics_Questions.aggregate([
+            const randomQuiz = await Physics_Questions.aggregate([
                 { $sample: { size: parseInt(parseInt(req.body.numberOfQuestions)) } }
-            ]).exec
+            ])
             console.log(randomQuiz)
             res.json({ quizContent: randomQuiz })
         } else if (subject === "Chemistry") {
-            const randomQuiz = Chemistry_Questions.aggregate([
+            const randomQuiz = await Chemistry_Questions.aggregate([
                 { $sample: { size: parseInt(parseInt(req.body.numberOfQuestions)) } }
-            ]).exec
+            ])
             res.json({ quizContent: randomQuiz })
         } else if (subject === "Biology") {
-            const randomQuiz = Biology_Questions.aggregate([
+            const randomQuiz = await Biology_Questions.aggregate([
                 { $sample: { size: parseInt(parseInt(req.body.numberOfQuestions)) } }
-            ]).exec
+            ])
             res.json({ quizContent: randomQuiz })
         }
     } catch (e) {

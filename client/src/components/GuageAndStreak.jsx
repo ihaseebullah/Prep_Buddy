@@ -33,11 +33,11 @@ export default function GuageAndStreak({ percentage }) {
             justifyContent="center"
           >
             <Typography
-              fontSize={15}
+              fontSize={20}
               style={{
                 color: "#1976D2",
               }}
-              fontFamily={"Bungee Spice "}
+              fontFamily={"Roboto "}
               textAlign="center"
             >
               Performance {percentage}%
@@ -54,9 +54,9 @@ export default function GuageAndStreak({ percentage }) {
             style={{ backgroundColor: "#3B4483" }}
           >
             <Typography
-              fontSize={15}
+              fontSize={20}
               className="text-gray-300"
-              fontFamily={"Bungee Spice "}
+              fontFamily={"Roboto "}
               textAlign="center"
             >
               Current Streak
@@ -69,10 +69,9 @@ export default function GuageAndStreak({ percentage }) {
             alignItems="center"
             justifyContent="center"
             style={{ backgroundColor: "#3B4483" }}
-
           >
             {/* <Gauge updateColor={handleUpdateColor} value={percentage} /> */}
-            
+
             <NumberCounter streak={userData.streak} />
           </Box>
         </Grid>

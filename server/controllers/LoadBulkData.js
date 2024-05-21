@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { English_Questions } = require("../Database/QuestionSchema");
+const { English_Questions, Biology_Questions, Chemistry_Questions, Physics_Questions } = require("../Database/QuestionSchema");
 const questions = require("../Database/Questions").questions
 function transformToComponentCompatible(originalData, developerData) {
     const {
@@ -82,9 +82,9 @@ async function loadBulkData(req, res) {
                 subject: "English"
             };
 
-            if (subject === "English") {
+            if (subject === "Physics") {
                 try {
-                    const newQuestion = new English_Questions(insertable);
+                    const newQuestion = new Physics_Questions(insertable);
                     await newQuestion.save();
                     console.log("Data Feeded " + i);
                     i++;
