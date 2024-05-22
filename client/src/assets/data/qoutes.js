@@ -220,11 +220,6 @@ export const quotes = [
         title: "Purpose of Education"
     },
     {
-        author: "Aristotle",
-        quote: "Excellence is never an accident. It is always the result of high intention, sincere effort, and intelligent execution; it represents the wise choice of many alternatives.",
-        title: "Excellence"
-    },
-    {
         author: "Maya Angelou",
         quote: "You may encounter many defeats, but you must not be defeated. In fact, it may be necessary to encounter the defeats, so you can know who you are, what you can rise from, how you can still come out of it.",
         title: "Encountering Defeats"

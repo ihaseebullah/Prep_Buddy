@@ -67,6 +67,65 @@ export default function OptionsPage({ subject }) {
         NavigateTo("/QUIZ");
       });
   };
+  const listOfSubjects = [
+    {
+      english: [
+        "Literary Analysis",
+        "Poetry",
+        "Creative Writing",
+        "Grammar and Syntax",
+        "Shakespearean Plays",
+        "Modernist Literature",
+        "Romanticism",
+        "American Literature",
+        "World Literature",
+        "Rhetoric and Composition",
+      ],
+    },
+    {
+      physics: [
+        "Classical Mechanics",
+        "Electromagnetism",
+        "Thermodynamics",
+        "Optics",
+        "Quantum Mechanics",
+        "Relativity",
+        "Nuclear Physics",
+        "Solid State Physics",
+        "Fluid Dynamics",
+        "Astrophysics",
+      ],
+    },
+    {
+      chemistry: [
+        "Organic Chemistry",
+        "Inorganic Chemistry",
+        "Physical Chemistry",
+        "Analytical Chemistry",
+        "Biochemistry",
+        "Chemical Kinetics",
+        "Thermochemistry",
+        "Electrochemistry",
+        "Quantum Chemistry",
+        "Environmental Chemistry",
+      ],
+    },
+    {
+      biology: [
+        "Cell Biology",
+        "Genetics",
+        "Evolution",
+        "Ecology",
+        "Human Anatomy",
+        "Physiology",
+        "Microbiology",
+        "Biochemistry",
+        "Molecular Biology",
+        "Botany",
+      ],
+    },
+  ];
+
   return (
     <>
       {loading ? (
@@ -113,34 +172,115 @@ export default function OptionsPage({ subject }) {
                 </Typography>
               </span>
               <span>
-                {[...Array(3).keys()].map((item, index) => {
-                  return (
-                    <Chip
-                      label="Deletable"
-                      style={{ margin: "0.2rem" }}
-                      onClick={() =>
-                        setOptionsForm({
-                          ...optionsForm,
-                          topics: optionsForm.topics
-                            ? [...optionsForm.topics, difficultyLevels[item]]
-                            : [difficultyLevels[item]],
-                        })
-                      }
-                      variant={
-                        optionsForm &&
-                        optionsForm.topics?.includes(difficultyLevels[item])
-                          ? ""
-                          : "outlined"
-                      }
-                      onDelete={
-                        optionsForm &&
-                        optionsForm.topics?.includes(difficultyLevels[item])
-                          ? () => handleDelete(difficultyLevels[item])
-                          : undefined
-                      }
-                    />
-                  );
-                })}
+                {subject === "English"
+                  ? listOfSubjects[0].english.map((item, index) => {
+                      return (
+                        <Chip
+                          label={item}
+                          style={{ margin: "0.2rem" }}
+                          onClick={() =>
+                            setOptionsForm({
+                              ...optionsForm,
+                              topics: optionsForm.topics
+                                ? [...optionsForm.topics, item]
+                                : [item],
+                            })
+                          }
+                          variant={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? ""
+                              : "outlined"
+                          }
+                          onDelete={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? () => handleDelete(item)
+                              : undefined
+                          }
+                        />
+                      );
+                    })
+                  : subject === "Chemistry"
+                  ? listOfSubjects[1].chemistry.map((item, index) => {
+                      return (
+                        <Chip
+                          label={item}
+                          style={{ margin: "0.2rem" }}
+                          onClick={() =>
+                            setOptionsForm({
+                              ...optionsForm,
+                              topics: optionsForm.topics
+                                ? [...optionsForm.topics, item]
+                                : [item],
+                            })
+                          }
+                          variant={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? ""
+                              : "outlined"
+                          }
+                          onDelete={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? () => handleDelete(item)
+                              : undefined
+                          }
+                        />
+                      );
+                    })
+                  : subject === "Physics"
+                  ? listOfSubjects[2].physics.map((item, index) => {
+                      return (
+                        <Chip
+                          label={item}
+                          style={{ margin: "0.2rem" }}
+                          onClick={() =>
+                            setOptionsForm({
+                              ...optionsForm,
+                              topics: optionsForm.topics
+                                ? [...optionsForm.topics, item]
+                                : [item],
+                            })
+                          }
+                          variant={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? ""
+                              : "outlined"
+                          }
+                          onDelete={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? () => handleDelete(item)
+                              : undefined
+                          }
+                        />
+                      );
+                    })
+                  : subject === "Biology"
+                  ? listOfSubjects[3].biology.map((item, index) => {
+                      return (
+                        <Chip
+                          label={item}
+                          style={{ margin: "0.2rem" }}
+                          onClick={() =>
+                            setOptionsForm({
+                              ...optionsForm,
+                              topics: optionsForm.topics
+                                ? [...optionsForm.topics, item]
+                                : [item],
+                            })
+                          }
+                          variant={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? ""
+                              : "outlined"
+                          }
+                          onDelete={
+                            optionsForm && optionsForm.topics?.includes(item)
+                              ? () => handleDelete(item)
+                              : undefined
+                          }
+                        />
+                      );
+                    })
+                  : null}
               </span>
               <br />
               <br />

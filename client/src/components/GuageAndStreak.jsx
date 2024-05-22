@@ -33,7 +33,7 @@ export default function GuageAndStreak({ percentage }) {
             justifyContent="center"
           >
             <Typography
-              fontSize={20}
+              fontSize={19}
               style={{
                 color: "#1976D2",
               }}

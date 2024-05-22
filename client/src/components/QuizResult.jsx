@@ -252,7 +252,8 @@ const QuizResult = ({ data }) => {
             </Box>
           );
         })}
-        <Box>
+        <div className="p-5">
+          <Box>
           <Grid container>
             <Grid item xs={6}>
               <button
@@ -275,6 +276,8 @@ const QuizResult = ({ data }) => {
             </Grid>
           </Grid>
         </Box>
+        </div>
+        
       </Box>
     </React.Fragment>
   );

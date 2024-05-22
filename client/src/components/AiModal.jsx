@@ -96,7 +96,7 @@ const AiModal = ({ close, initialPrompt }) => {
     >
       <Paper
         sx={{
-          height: "100vh",
+          height: "93vh",
           width: "100vw",
           background: "rgba(248, 255, 253, 0.14)",
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
