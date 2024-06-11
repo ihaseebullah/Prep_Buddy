@@ -8,7 +8,7 @@ import AuthContextProvider from "./Context/AuthContext";
 import ResultsContextProvider from "./Context/ResultsContext";
 
 function App() {
-  axios.defaults.baseURL = "http://192.168.79.204:3000";
+  axios.defaults.baseURL = "http://localhost:3000";
   axios.defaults.withCredentials = true;
   return (
     <MainContextProvider>
