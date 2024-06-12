@@ -82,12 +82,27 @@ async function loadBulkData(req, res) {
                 subject: "English"
             };
 
-            if (subject === "Physics") {
+            async (subject, insertable) => {
                 try {
-                    const newQuestion = new Physics_Questions(insertable);
+                    let newQuestion;
+                    switch (subject) {
+                        case "Physics":
+                            newQuestion = new Physics_Questions(insertable);
+                            break;
+                        case "Biology":
+                            newQuestion = new Biology_Questions(insertable);
+                            break;
+                        case "Chemistry":
+                            newQuestion = new Chemistry_Questions(insertable);
+                            break;
+                        case "English":
+                            newQuestion = new English_Questions(insertable);
+                            break;
+                        default:
+                            throw new Error("Invalid subject");
+                    }
                     await newQuestion.save();
-                    console.log("Data Feeded " + i);
-                    i++;
+                    console.log("Data Feeded");
                 } catch (e) {
                     console.error("Error saving question:", e.message);
                 }
