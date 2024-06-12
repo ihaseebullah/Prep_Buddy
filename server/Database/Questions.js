@@ -1,102 +1,60 @@
-const questions = `[
-  {
-    "question": "A body is moving in a circle under centripetal force “Fc”. If its linear velocity and radius both are made twice, the centripetal force will be:",
-    "options": ["A. Fc", "B. 2Fc", "C. Fd/2", "D. 4Fc"],
-    "correct": "D",
-    "explanation": "B"
-},
-{
-    "question": "The angle between velocity and acceleration in uniform circular motion is",
-    "options": ["A. 180°", "B. 0°", "C. 90°", "D. 45°"],
-    "correct": "C",
-    "explanation": "C"
-},
-{
-    "question": "A body of mass 2kg is moving in a circle of radius 3m with velocity 6 ms-1 acceleration is:",
-    "options": ["A. 24 ms-2", "B. 36 ms-2", "C. 12 ms-2", "D. 18 ms-2"],
-    "correct": "C",
-    "explanation": "ac = v^2/r = 6^2/3 = 36/3 = 12 m/s^2"
-},
-{
-    "question": "The time rate of change of angular displacement is called:",
-    "options": ["A. Linear velocity", "B. Angular velocity", "C. Linear speed", "D. Angular speed"],
-    "correct": "B",
-    "explanation": "The time rate of change of angular displacement is called angular velocity. It is given by ω = Δθ/Δt"
-},
-{
-    "question": "An electric motor of 12 horse power generates an angular velocity of 22rad/s. What will be the frequency of rotation?",
-    "options": ["A. 20/π", "B. 7/2", "C. 10/π", "D. 7/44"],
-    "correct": "B",
-    "explanation": "B"
-},
-{
-    "question": "Centripetal force performs",
-    "options": ["A. Maximum work", "B. Minimum work", "C. Negative work", "D. No work"],
-    "correct": "D",
-    "explanation": "The centripetal force does not do any work because this force is always acting at right angle to the motion of the body or to the velocity of the body along the tangent. Therefore, when the work is done at constant rate this Work done by centripetal force is zero"
-},
-{
-    "question": "A body moving along the circumference of a circle completes two revolutions. If the radius of the circular path is “R”, the ratio of displacement to the covered path will be",
-    "options": ["A. πR", "B. 2πR", "C. Zero", "D. 4πR"],
-    "correct": "C",
-    "explanation": "C"
-},
-{
-    "question": "The angular speed for daily rotation of earth in rad s-1 is",
-    "options": ["A. 2π", "B. π", "C. 4π", "D. 7.3×10-5 rad-1"],
-    "correct": "D",
-    "explanation": "D"
-},
-{
-    "question": "One radian is equal to",
-    "options": ["A. 67.3°", "B. 57.3°", "C. 87.3°", "D. 60°"],
-    "correct": "B",
-    "explanation": "B"
-},
-{
-    "question": "The useful unit of angular displacement in SI unit is",
-    "options": ["A. Meter", "B. Degree", "C. Revolution", "D. Radian"],
-    "correct": "D",
-    "explanation": "D"
-},
-{
-    "question": "Geo-stationary satellite completes one rotation around earth in",
-    "options": ["A. 3 hours", "B. 6 hours", "C. 12 hours", "D. 24 hours"],
-    "correct": "D",
-    "explanation": "Geo-stationary satellite completes one rotation around earth in 24 hours."
-},
-{
-    "question": "Radius of geo-stationary orbit from center of earth is nearly",
-    "options": ["A. 42000 km", "B. 36000 km", "C. 24000 km", "D. 18000 km"],
-    "correct": "A",
-    "explanation": "A geostationary equatorial orbit (GEO) is a circular geosynchronous orbit in the plane of the Earth’s equator with a radius of approximately 42,164 km (26,199 mi) (measured from the center of the Earth)."
-},
-{
-    "question": "Who discovered the inverse square law for gravity?",
-    "options": ["A. Einstein", "B. Galileo", "C. Newton", "D. Plank"],
-    "correct": "C",
-    "explanation": "The inverse square law proposed by Newton suggests that the force of gravity acting between any two objects is inversely proportional to the square of the separation distance between the object’s centers."
-},
-{
-    "question": "How many days would be in a year if the distance between the earth and the sun were reduced to half of its present value (assuming circular orbit)?",
-    "options": ["A. 365 days", "B. 730 days", "C. 329 days", "D. 129 days"],
-    "correct": "D",
-    "explanation": "According to Kepler’s law T² ∝ r³ (T₁/T₂)² = (r₁/r₂)³ (365/T₂)² = (2r₁/r₁)³ (365/T₂)² = 8 (365/T₂) = 2√2 T₂ = 365 / (2√2) T₂ = 129 days There will be 129 days in a year."
-},
-{
-    "question": "Angular momentum is conserved under",
-    "options": ["A. Constant Force", "B. Central Force", "C. Variable Force", "D. Uniform Force"],
-    "correct": "B",
-    "explanation": "Central forces are directed towards the center, hence angular momentum is conserved under these forces."
-},
-{
-    "question": "° = _______ radian.",
-    "options": ["A. 0.01745", "B. 0.1745", "C. 57", "D. 0.2"],
-    "correct": "A",
-    "explanation": "Self Explanatory"
-}
+const questions = `
+[
+    {
+        "question": "Which of the following characteristics represents ‘Inheritance of blood groups’ in humans?",
+        "options": ["I. Dominance", "II. Co-dominance", "III. Multiple allele", "IV. Incomplete dominance", "V. Polygenic inheritance"],
+        "correct": "C",
+        "explanation": "IAIO, IBIO –Dominant – recessive relationship, IAIB – Codominance, IA, IB & IO – Three different allelic forms of a gene (multiple allelism)."
+    },
+    {
+        "question": "Which of the following most appropriately describes haemophilia?",
+        "options": ["A. Recessive gene disorder", "B. X – linked recessive gene disorder", "C. Chromosomal disorder", "D. Dominant gene disorder"],
+        "correct": "B",
+        "explanation": "Haemophilia A and haemophilia B are inherited in an X – linked recessive pattern. The genes associated with these conditions are located on the X chromosome, which is one of the two sex chromosomes. In males (who have only one X chromosome), one altered copy of the gene in each cell is sufficient to cause the condition. In females (who have two X chromosomes), a mutation would have to occur in both copies of the gene to cause the disorder because it is unlikely that females will have two altered copies of this gene, it is very rare for females to have haemophilia. A characteristic of X – linked inheritance is that fathers cannot pass X – linked traits to their sons."
+    },
+    {
+        "question": "A pleiotropic gene:",
+        "options": ["A. Is a gene evolved during Pliocene", "B. Controls a trait only in combination with another gene", "C. Controls multiple traits in an individual", "D. Is expresses only in primitive plants."],
+        "correct": "C",
+        "explanation": "A pleiotropic gene regulates multiple traits (characteristic) in an individual."
+    },
+    {
+        "question": "In our society women are blamed for producing female children. Choose the correct answer for the sex-determination in humans.",
+        "options": ["A. Due to some defect in the women", "B. Due to some defect like aspermia in man", "C. Due to the genetic make-up of the particular sperm which fertilizes the egg", "D. Due to the genetic make-up of the egg"],
+        "correct": "C",
+        "explanation": "In case of humans, the sex determining mechanism is XY type. Out of 23 pairs of chromosome, 22 pairs are exactly same in both males and females called autosomes. A pair of X chromosomes is present in the female, whereas the presence of an X and Y chromosome are determinant of male characteristic. In case the ovum fertilizes with a sperm carrying X chromosome the zygote develops into a female (XX) and the fertilization of ovum with Y chromosome carrying sperm results into a male offspring."
+    },
+    {
+        "question": "Which traits in humans is an example of multiple alleles?",
+        "options": ["A. Eye color", "B. Skin color", "C. ABO blood group", "D. Rh blood group"],
+        "correct": "C",
+        "explanation": "ABO blood group is the first discovered multiple allelic blood groups system in humans. This system has 4 different phenotypes which are distinct from each other on basis of specific antigens on surface of RBC."
+    },
+    {
+        "question": "Human have which of the following sex determining type?",
+        "options": ["A. XO-XX", "B. XY-XX", "C. ZZ-ZW", "D. None of the above"],
+        "correct": "B",
+        "explanation": "Humans have XY-XX sex determining type in which the males determine the sex of the child."
+    },
+    {
+        "question": "Which of the following trait is transmitted directly from father to son?",
+        "options": ["A. Autosomal dominant", "B. Autosomal recessive", "C. X-linked", "D. Y-linked"],
+        "correct": "D",
+        "explanation": "Y-linked trait is transmitted from father to son directly as Y gene is received by son only."
+    },
+    {
+        "question": "Mendel’s perform series of experiments on pea plant because it’s _________?",
+        "options": ["A. Flowers were hermaphrodite", "B. Had sharply distinct trait", "C. Self-fertilization is easy", "D. All of above"],
+        "correct": "D",
+        "explanation": "Self Explanatory"
+    },
+    {
+        "question": "What is the pathophysiology in hemophilia?",
+        "options": ["A. Disseminated intravascular coagulation", "B. Thromboembolism", "C. Blood fails to clot after an injury", "D. Increase viscosity of blood"],
+        "correct": "C",
+        "explanation": "In hemophilia blood fails to clot due to reduction or complete absence of clotting factor."
+    }
 ]
-
   `
 
 module.exports = { questions }

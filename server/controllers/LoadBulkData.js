@@ -79,33 +79,32 @@ async function loadBulkData(req, res) {
                 messageForIncorrectAnswer: question.messageForIncorrectAnswer,
                 explanation: question.explanation,
                 point: (question.point),
-                subject: "English"
+                subject: subject
             };
 
-            async (subject, insertable) => {
-                try {
-                    let newQuestion;
-                    switch (subject) {
-                        case "Physics":
-                            newQuestion = new Physics_Questions(insertable);
-                            break;
-                        case "Biology":
-                            newQuestion = new Biology_Questions(insertable);
-                            break;
-                        case "Chemistry":
-                            newQuestion = new Chemistry_Questions(insertable);
-                            break;
-                        case "English":
-                            newQuestion = new English_Questions(insertable);
-                            break;
-                        default:
-                            throw new Error("Invalid subject");
-                    }
-                    await newQuestion.save();
-                    console.log("Data Feeded");
-                } catch (e) {
-                    console.error("Error saving question:", e.message);
+            try {
+                let newQuestion;
+                switch (subject) {
+                    case "Physics":
+                        newQuestion = new Physics_Questions(insertable);
+                        console.log("here...")
+                        break;
+                    case "Biology":
+                        newQuestion = new Biology_Questions(insertable);
+                        break;
+                    case "Chemistry":
+                        newQuestion = new Chemistry_Questions(insertable);
+                        break;
+                    case "English":
+                        newQuestion = new English_Questions(insertable);
+                        break;
+                    default:
+                        throw new Error("Invalid subject");
                 }
+                await newQuestion.save();
+                console.log("Data Feeded");
+            } catch (e) {
+                console.error("Error saving question:", e.message);
             }
         }
         res.status(200).json({ message: `${i} number of MCQs data has been uploaded successfully` });
