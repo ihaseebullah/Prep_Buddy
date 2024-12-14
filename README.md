@@ -1,1 +1,1 @@
-# Prep Buddy
+# PrepBuddy
