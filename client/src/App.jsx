@@ -5,7 +5,7 @@ import MainContextProvider from "./Context/Context";
 import Router from "./router/Router";
 import QuizContextProvider from "./Context/QuizContext";
 import AuthContextProvider from "./Context/AuthContext";
-import ResultsContextProvider from "./Context/ResultsContext";
+import ResultsContextProvider from "./Context/ResultsContext"
 
 function App() {
   axios.defaults.baseURL = "http://localhost:3000";
